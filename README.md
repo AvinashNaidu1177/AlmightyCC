@@ -51,7 +51,7 @@ Hosting your own backend is **not recommended** unless you specifically need to,
 Instead, you can directly use the **hosted UniCC backend API**: ```https://uniccapi.uni-cc.site/```
 To do this, modify the API base URL in: `src/components/custom/main.tsx` Change it to:
 ```ts
-export const API_BASE = "https://uniccapi.uni-cc.site";
+export const API_BASE = "https://api.uni-cc.site/";
 ```
 ---
 ## Optional: Hosting Your Own Backend
