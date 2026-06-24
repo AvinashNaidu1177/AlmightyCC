@@ -29,12 +29,7 @@ const nextConfig = {
     ],
     unoptimized: true
   },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push("@napi-rs/canvas");
-    }
-    return config;
-  },
+
   typescript: {
     ignoreBuildErrors: true,
   },
