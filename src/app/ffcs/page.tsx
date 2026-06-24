@@ -11,6 +11,7 @@ import {
 import FFCSTimetableGrid, { Course } from "@/components/custom/ffcs/FFCSTimetableGrid";
 import FFCSSummary from "@/components/custom/ffcs/FFCSSummary";
 import FFCSControls from "@/components/custom/ffcs/FFCSControls";
+import { toast } from "sonner";
 // Removed useToast
 
 
@@ -44,7 +45,7 @@ export default function FFCSPage() {
     const handleClearAll = () => {
         if (confirm("Remove ALL courses from your timetable? This cannot be undone.")) {
             setCourses([]);
-            alert("All courses cleared.");
+            toast.success("All courses cleared.");
         }
     };
 

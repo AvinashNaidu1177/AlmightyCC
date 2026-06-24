@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/themeprovider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Viewport, Metadata } from "next";
+import { Toaster } from "sonner";
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           {children}
         </ThemeProvider>
+        <Toaster theme="dark" toastOptions={{ className: 'bg-gray-900 border-purple-600 text-white' }} />
         <Analytics />
         <SpeedInsights />
       </body>

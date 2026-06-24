@@ -10,130 +10,119 @@ import TermsOfServicePage from "./TermsOfService";
 import { brandingConfig } from "../../../lib/branding.config";
 
 type FooterProps = {
-  isLoggedIn: boolean;
+ isLoggedIn: boolean;
 }
 
 export default function Footer({ isLoggedIn }: FooterProps) {
-  const [showStoragePage, setShowStoragePage] = useState<boolean>(false);
-  const [storageData, setStorageData] = useState<Record<string, string | null>>({});
-  const [showPolicy, setShowPolicy] = useState<boolean>(false);
-  const [showTOS, setShowTOS] = useState<boolean>(false);
+ const [showStoragePage, setShowStoragePage] = useState<boolean>(false);
+ const [storageData, setStorageData] = useState<Record<string, string | null>>({});
+ const [showPolicy, setShowPolicy] = useState<boolean>(false);
+ const [showTOS, setShowTOS] = useState<boolean>(false);
 
-  const openStoragePage = () => {
-    const data: Record<string, string> = {};
+ const openStoragePage = () => {
+ const data: Record<string, string> = {};
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (!key) continue;
-      const value = localStorage.getItem(key);
-      if (value !== null) data[key] = value;
-    }
+ for (let i = 0; i < localStorage.length; i++) {
+ const key = localStorage.key(i);
+ if (!key) continue;
+ const value = localStorage.getItem(key);
+ if (value !== null) data[key] = value;
+ }
 
-    const sortedEntries = Object.entries(data).sort(
-      (a, b) => (a[1]?.length || 0) - (b[1]?.length || 0)
-    );
+ const sortedEntries = Object.entries(data).sort(
+ (a, b) => (a[1]?.length || 0) - (b[1]?.length || 0)
+ );
 
-    const sortedData = Object.fromEntries(sortedEntries);
-    const ordered: Record<string, string> = {};
+ const sortedData = Object.fromEntries(sortedEntries);
+ const ordered: Record<string, string> = {};
 
-    if (sortedData.username) ordered.username = sortedData.username;
-    if (sortedData.password) ordered.password = sortedData.password;
-    for (const key in sortedData) {
-      if (key !== "username" && key !== "password") {
-        ordered[key] = sortedData[key];
-      }
-    }
+ if (sortedData.username) ordered.username = sortedData.username;
+ if (sortedData.password) ordered.password = sortedData.password;
+ for (const key in sortedData) {
+ if (key !== "username" && key !== "password") {
+ ordered[key] = sortedData[key];
+ }
+ }
 
-    setStorageData(ordered);
-    setShowStoragePage(true);
-  };
+ setStorageData(ordered);
+ setShowStoragePage(true);
+ };
 
-  const handleDeleteItem = (key: string) => {
-    localStorage.removeItem(key);
-    setStorageData((prev) => {
-      const updated = { ...prev };
-      delete updated[key];
-      return updated;
-    });
-  };
+ const handleDeleteItem = (key: string) => {
+ localStorage.removeItem(key);
+ setStorageData((prev) => {
+ const updated = { ...prev };
+ delete updated[key];
+ return updated;
+ });
+ };
 
-  return (
-    <footer className="bg-transparent text-gray-700 dark:text-gray-300 midnight:text-gray-300 flex items-center justify-center">
-      {showStoragePage && isLoggedIn && <DataPage handleClose={() => setShowStoragePage(false)} handleDeleteItem={handleDeleteItem} storageData={storageData} />}
-      {showPolicy && <PrivacyPolicyPage handleClose={() => setShowPolicy(false)} />}
-      {showTOS && <TermsOfServicePage handleClose={() => setShowTOS(false)} />}
-      <div className="max-w-7xl mx-auto px-3 py-6 text-center w-full">
-        <hr className="border-gray-300 dark:border-gray-700 midnight:border-gray-700 w-11/12 mx-auto mb-6" />
+ return (
+ <footer className="bg-transparent text-gray-400 dark:text-gray-300 flex items-center justify-center">
+ {showStoragePage && isLoggedIn && <DataPage handleClose={() => setShowStoragePage(false)} handleDeleteItem={handleDeleteItem} storageData={storageData} />}
+ {showPolicy && <PrivacyPolicyPage handleClose={() => setShowPolicy(false)} />}
+ {showTOS && <TermsOfServicePage handleClose={() => setShowTOS(false)} />}
+ <div className="max-w-7xl mx-auto px-3 py-6 text-center w-full">
+ <hr className="border-gray-700 w-11/12 mx-auto mb-6" />
 
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Button variant="outline" size="icon" asChild>
-            <a
-              href={brandingConfig.urls.repository}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github
-                size={20}
-                className="text-gray-600 dark:text-gray-300 midnight:text-gray-300"
-              />
-            </a>
-          </Button>
-          <Button variant="outline" size="icon" asChild>
-            <a
-              href={brandingConfig.urls.api}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Link
-                size={20}
-                className="text-gray-600 dark:text-gray-300 midnight:text-gray-300"
-              />
-            </a>
-          </Button>
+ <div className="flex items-center justify-center gap-2 mb-4">
+ <Button variant="outline" size="icon" asChild>
+ <a
+ href={brandingConfig.urls.repository}
+ target="_blank"
+ rel="noopener noreferrer"
+ >
+ <Github
+ size={20}
+ className="text-gray-600 dark:text-gray-300 "
+ />
+ </a>
+ </Button>
 
-          <p className="text-sm font-medium tracking-wide px-5">
-            Powered by {brandingConfig.appName}{" "}
-            {/* <span className="ml-2 text-xs text-gray-400">v0.1.3</span> */}
-          </p>
 
-          <Button variant="outline" size="icon" onClick={openStoragePage}>
-            <Database className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all" />
-          </Button>
-          <IconToggle />
-        </div>
+ <p className="text-sm font-medium tracking-wide px-5">
+ Powered by {brandingConfig.appName}{" "}
+ {/* <span className="ml-2 text-xs text-gray-400">v0.1.3</span> */}
+ </p>
 
-        <span className="text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400 block">
-          &copy; {new Date().getFullYear()} {brandingConfig.appName}. All rights reserved. &nbsp;
-        </span>
-        <div>
-          <a
-            href="/ffcs"
-            className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
-          >
-            FFCS Planner
-          </a> • 
-          <a
-            href="/faculty"
-            className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
-          >
-            Faculty Info
-          </a> • 
-          <Button
-            variant="ghost"
-            className="mt-2 ml-1 w-18 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
-            onClick={() => setShowPolicy(true)}
-          >
-            Privacy Policy
-          </Button> • 
-          <Button
-            variant="ghost"
-            className="mt-2 ml-1 w-22 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
-            onClick={() => setShowTOS(true)}
-          >
-            Terms of Service
-          </Button>
-        </div>
-      </div>
-    </footer>
-  );
+ <Button variant="outline" size="icon" onClick={openStoragePage}>
+ <Database className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all" />
+ </Button>
+ <IconToggle />
+ </div>
+
+ <span className="text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400 block">
+ &copy; {new Date().getFullYear()} {brandingConfig.appName}. All rights reserved. &nbsp;
+ </span>
+ <div>
+ <a
+ href="/ffcs"
+ className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+ >
+ FFCS Planner
+ </a> • 
+ <a
+ href="/faculty"
+ className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+ >
+ Faculty Info
+ </a> • 
+ <Button
+ variant="ghost"
+ className="mt-2 ml-1 w-18 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
+ onClick={() => setShowPolicy(true)}
+ >
+ Privacy Policy
+ </Button> • 
+ <Button
+ variant="ghost"
+ className="mt-2 ml-1 w-22 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
+ onClick={() => setShowTOS(true)}
+ >
+ Terms of Service
+ </Button>
+ </div>
+ </div>
+ </footer>
+ );
 }

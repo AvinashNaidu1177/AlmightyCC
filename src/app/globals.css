@@ -80,11 +80,11 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #000000;
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: #0a0a0a;
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: #0a0a0a;
   --popover-foreground: oklch(0.985 0 0);
   --primary: #792CA2;
   --primary-foreground: oklch(0.985 0 0);
@@ -114,11 +114,11 @@
 }
 
 .midnight {
-  --background: oklch(0.1 0 0);
+  --background: #000000;
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.15 0 0);
+  --card: #0a0a0a;
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.15 0 0);
+  --popover: #0a0a0a;
   --popover-foreground: oklch(0.985 0 0);
   --primary: #792CA2;
   --primary-foreground: oklch(0.985 0 0);
