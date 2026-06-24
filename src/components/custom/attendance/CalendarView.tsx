@@ -191,7 +191,7 @@ export default function CalendarView({ calendars, calendarType, handleCalendarFe
                                 dayType === "holiday"
                                     ? "bg-red-50 dark:bg-red-900/30 midnight:bg-red-900/30"
                                     : dayType === "instructional"
-                                        ? "bg-green-50 dark:bg-green-900/30 midnight:bg-green-900/30"
+                                        ? "bg-purple-50 dark:bg-purple-900/30 midnight:bg-purple-900/30"
                                         : dayType === "semiholiday"
                                             ? "bg-yellow-50 dark:bg-yellow-900/30 midnight:bg-yellow-900/30"
                                             : "bg-gray-50 dark:bg-gray-900/30 midnight:bg-gray-900/30";
@@ -212,7 +212,7 @@ export default function CalendarView({ calendars, calendarType, handleCalendarFe
                                             className={`text-xs font-semibold px-2 py-0.5 rounded ${dayType === "holiday"
                                                 ? "bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-100 midnight:bg-red-900 midnight:text-red-200"
                                                 : dayType === "instructional"
-                                                    ? "bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-100 midnight:bg-green-900 midnight:text-green-200"
+                                                    ? "bg-purple-200 text-purple-800 dark:bg-purple-800 dark:text-purple-100 midnight:bg-purple-900 midnight:text-purple-200"
                                                     : dayType === "semiholiday"
                                                         ? "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100 midnight:bg-yellow-900 midnight:text-yellow-200"
                                                         : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100 midnight:bg-gray-800 midnight:text-gray-200"
@@ -235,7 +235,7 @@ export default function CalendarView({ calendars, calendarType, handleCalendarFe
                                                     const tagClass = isHolidayEvent(e)
                                                         ? "bg-red-100 text-red-800 border-red-200 dark:bg-red-800/40 dark:text-red-200 midnight:bg-red-950/40 midnight:text-red-300"
                                                         : isInstructionalEvent(e)
-                                                            ? "bg-green-100 text-green-800 border-green-200 dark:bg-green-800/40 dark:text-green-200 midnight:bg-green-950/40 midnight:text-green-300"
+                                                            ? "bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-800/40 dark:text-purple-200 midnight:bg-purple-950/40 midnight:text-purple-300"
                                                             : "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-800/40 dark:text-yellow-200 midnight:bg-yellow-950/40 midnight:text-yellow-300";
                                                     const label = e.category && e.category !== "General" ? e.category : e.text;
                                                     const parts = String(label).split("/").map(p => p.trim()).filter(Boolean);

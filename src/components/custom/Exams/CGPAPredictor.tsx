@@ -114,7 +114,7 @@ export default function CGPAPredictor({ data, attendance, CGPA }) {
     return (
         <div className="col-span-full p-3 rounded-lg shadow bg-white dark:bg-slate-800 midnight:bg-black">
             <div className="mb-2 text-center">
-                <span className="text-lg font-semibold dark:text-green-400">
+                <span className="text-lg font-semibold dark:text-purple-400">
                     Predict CGPA
                 </span>
             </div>
@@ -132,16 +132,16 @@ export default function CGPAPredictor({ data, attendance, CGPA }) {
                     <p className="text-xs text-gray-600 dark:text-gray-300 midnight:text-gray-400">Predicted GPA</p>
                     <p className="text-xl font-bold text-gray-900 dark:text-gray-100 midnight:text-gray-200">{predictedGpa.toFixed(2)}</p>
                 </div>
-                <div className="rounded-lg border border-green-200 dark:border-green-800 midnight:border-green-900 p-3 bg-green-50 dark:bg-green-950/40 midnight:bg-green-950/20">
-                    <p className="text-xs text-green-700 dark:text-green-300">Predicted CGPA</p>
-                    <p className="text-xl font-bold text-green-800 dark:text-green-200">{predictedCgpa.toFixed(2)}</p>
+                <div className="rounded-lg border border-purple-200 dark:border-purple-800 midnight:border-purple-900 p-3 bg-purple-50 dark:bg-purple-950/40 midnight:bg-purple-950/20">
+                    <p className="text-xs text-purple-700 dark:text-purple-300">Predicted CGPA</p>
+                    <p className="text-xl font-bold text-purple-800 dark:text-purple-200">{predictedCgpa.toFixed(2)}</p>
                 </div>
             </div>
 
             <div className="mb-5 rounded-lg border border-gray-200 dark:border-slate-700 midnight:border-gray-800 p-4">
                 <div className="flex flex-col text-center items-center gap-3 mb-3">
                     <div className="mb-2 text-center justify-center">
-                        <span className="text-lg font-semibold dark:text-green-400">
+                        <span className="text-lg font-semibold dark:text-purple-400">
                             Per Sem Predictor
                         </span>
                     </div>

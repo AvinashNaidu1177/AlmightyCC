@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import ErrorDiagnosticCard from "@/components/custom/ErrorDiagnosticCard";
+import { brandingConfig } from "../lib/branding.config";
 
 type ErrorWithDigest = Error & { digest?: string };
 
@@ -13,7 +14,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("[UniCC client route error]", error);
+    console.error(`[${brandingConfig.appName} client route error]`, error);
   }, [error]);
 
   return (

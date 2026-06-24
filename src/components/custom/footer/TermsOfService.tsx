@@ -3,6 +3,8 @@
 import { X } from "lucide-react";
 import { Button } from "../../ui/button";
 
+import { brandingConfig } from "../../../lib/branding.config";
+
 export default function TermsOfServicePage({ handleClose }) {
     return (
         <div className="fixed inset-0 z-50 bg-gray-100 dark:bg-slate-900 midnight:bg-black bg-opacity-95 flex flex-col items-center justify-start overflow-y-auto p-6">
@@ -22,7 +24,7 @@ export default function TermsOfServicePage({ handleClose }) {
 
             <div className="w-full max-w-3xl space-y-4 text-gray-700 dark:text-gray-300 midnight:text-gray-200 text-sm leading-relaxed">
                 <p>
-                    Welcome to <strong>Uni CC</strong>. By using this application, you agree to the following Terms of Service.
+                    Welcome to <strong>AlmightyCC</strong>. By using this application, you agree to the following Terms of Service.
                     Please read them carefully before using the app.
                 </p>
 
@@ -30,7 +32,7 @@ export default function TermsOfServicePage({ handleClose }) {
                     Purpose
                 </h3>
                 <p>
-                    <strong>Uni CC</strong> is an experimental web application created solely for educational and personal
+                    <strong>AlmightyCC</strong> is an experimental web application created solely for educational and personal
                     use. It provides tools to help students view and organize their academic data retrieved from
                     <strong> VTOP</strong> (VIT’s official portal). This app is not an official VIT product and is
                     <strong> not affiliated, endorsed, or maintained by Vellore Institute of Technology (VIT)</strong>
@@ -56,7 +58,7 @@ export default function TermsOfServicePage({ handleClose }) {
                     No Monetization or Commercial Use
                 </h3>
                 <p>
-                    <strong>Uni CC</strong> is a free and non-commercial project. The developer does not earn revenue,
+                    <strong>AlmightyCC</strong> is a free and non-commercial project. The developer does not earn revenue,
                     display advertisements, sell data, or monetize the service in any way.
                     The app is provided purely for fun, learning, and experimentation purposes.
                 </p>
@@ -95,7 +97,7 @@ export default function TermsOfServicePage({ handleClose }) {
                 </h3>
                 <p>
                     For any concerns, questions, or feedback related to this app or these Terms of Service,
-                    you can contact the developer at <strong>aryapanwar493@gmail.com</strong>.
+                    you can contact the developer at <strong>{brandingConfig.emails.support}</strong>.
                 </p>
 
                 <p className="text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400 mt-6">

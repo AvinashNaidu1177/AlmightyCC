@@ -187,7 +187,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
                     />
                   )}
                   <div
-                    className={`absolute left-0 top-0 h-full ${isComplete ? "bg-green-500" : "bg-blue-500 dark:bg-blue-600"
+                    className={`absolute left-0 top-0 h-full ${isComplete ? "bg-purple-500" : "bg-blue-500 dark:bg-blue-600"
                       }`}
                     style={{ width: `${progressEarned}%` }}
                   />
@@ -233,7 +233,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
                           />
                         )}
                         <div
-                          className={`absolute left-0 top-0 h-full ${isComplete ? "bg-green-500" : "bg-blue-500 dark:bg-blue-600"
+                          className={`absolute left-0 top-0 h-full ${isComplete ? "bg-purple-500" : "bg-blue-500 dark:bg-blue-600"
                             }`}
                           style={{ width: `${progressEarned}%` }}
                         />
@@ -284,7 +284,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
                         />
                       )}
                       <div
-                        className={`absolute left-0 top-0 h-full ${isComplete ? "bg-green-500" : "bg-blue-500 dark:bg-blue-600"
+                        className={`absolute left-0 top-0 h-full ${isComplete ? "bg-purple-500" : "bg-blue-500 dark:bg-blue-600"
                           }`}
                         style={{ width: `${progressEarned}%` }}
                       />

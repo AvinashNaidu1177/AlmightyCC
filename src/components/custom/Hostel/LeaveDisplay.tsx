@@ -49,9 +49,9 @@ export default function LeaveDisplay({ leaveData, handleHostelDetailsFetch }) {
         const normalized = status.toUpperCase().trim();
 
         if (normalized.includes("REQUEST APPROVED"))
-            return "bg-green-500 text-white";
+            return "bg-purple-500 text-white";
         if (normalized.includes("LEAVE CLOSED"))
-            return "bg-green-700 text-white";
+            return "bg-purple-700 text-white";
         if (normalized.includes("REQUEST PENDING"))
             return "bg-yellow-500 text-black";
         if (normalized.includes("REQUEST CANCELLED BEFORE APPROVAL"))

@@ -109,7 +109,7 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
     const ics = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//Uni CC//Schedule Export//EN",
+      "PRODID:-//AlmightyCC//Schedule Export//EN",
       events,
       "END:VCALENDAR",
     ].join("\n");
@@ -155,9 +155,9 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
       </h1>
 
       {sortedTodayExams.length > 0 && (
-        <div className="bg-green-100 dark:bg-green-700/40 midnight:bg-green-800/40 
-                  rounded-xl p-4 shadow mb-6 border border-green-300 
-                  dark:border-green-600 midnight:border-green-700">
+        <div className="bg-purple-100 dark:bg-purple-700/40 midnight:bg-purple-800/40 
+                  rounded-xl p-4 shadow mb-6 border border-purple-300 
+                  dark:border-purple-600 midnight:border-purple-700">
 
           <div className="space-y-6">
             {sortedTodayExams.map((exam, i) => (
@@ -165,8 +165,8 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
                 key={i}
                 className="grid grid-cols-2 lg:grid-cols-3 gap-4
                      bg-white/40 dark:bg-black/20 midnight:bg-black/20
-                     p-4 rounded-lg border border-green-200 
-                     dark:border-green-600/40 midnight:border-green-700/40"
+                     p-4 rounded-lg border border-purple-200 
+                     dark:border-purple-600/40 midnight:border-purple-700/40"
               >
                 <div>
                   <p className="font-semibold">Course:</p>
@@ -265,7 +265,7 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
                         " opacity-40 line-through hover:opacity-50 cursor-not-allowed";
                     else if (isToday)
                       rowClass +=
-                        " !bg-green-100 dark:!bg-green-600/40 midnight:!bg-green-700/50 !text-green-900 dark:!text-green-200";
+                        " !bg-purple-100 dark:!bg-purple-600/40 midnight:!bg-purple-700/50 !text-purple-900 dark:!text-purple-200";
 
                     return (
                       <TableRow key={idx} className={rowClass}>

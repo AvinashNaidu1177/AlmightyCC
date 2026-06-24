@@ -149,7 +149,7 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
                                             ? "#EF4444"
                                             : a.attendancePercentage < 85
                                                 ? "#FACC15"
-                                                : "#2df04aff",
+                                                : "#A855F7",
                                     textColor: "currentColor",
                                     trailColor: "#a3c6f0ff",
                                     strokeLinecap: "round",
@@ -190,7 +190,7 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
                                 );
                             } else {
                                 return (
-                                    <p className="text-green-500 dark:text-green-400 midnight:text-green-400 text-sm">
+                                    <p className="text-purple-500 dark:text-purple-400 midnight:text-purple-400 text-sm">
                                         Can miss <strong>{canMissValue}</strong> {lab ? "lab" : "class"}
                                         {canMissValue !== 1 && (lab ? "s" : "es")} and stay above 75%.
                                     </p>
@@ -274,7 +274,7 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
                                     d.status.toLowerCase() === "absent"
                                         ? "text-red-500"
                                         : d.status.toLowerCase() === "present"
-                                            ? "text-green-500"
+                                            ? "text-purple-500"
                                             : d.status.toLowerCase() === "on duty"
                                                 ? "text-yellow-500"
                                                 : "text-gray-700 dark:text-gray-300 midnight:text-gray-300"
@@ -456,11 +456,11 @@ function UpcomingClassesList({ classes, attendedClasses = 0, totalClasses = 0, i
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-medium 
                       bg-gray-100 dark:bg-slate-800 midnight:bg-gray-900 
                       px-3 mt-2 py-2 rounded-md border border-gray-200 dark:border-gray-700 midnight:border-gray-800">
-                <span className="text-green-600 dark:text-green-400">Attending: <strong>{attending}</strong></span>
+                <span className="text-purple-600 dark:text-purple-400">Attending: <strong>{attending}</strong></span>
                 <span className="text-red-500 dark:text-red-400">Not Attending: <strong>{missed}</strong></span>
                 <span
                     className={`font-semibold ${predictedPercent >= 75
-                        ? "text-green-600 dark:text-green-400"
+                        ? "text-purple-600 dark:text-purple-400"
                         : "text-red-500 dark:text-red-400"
                         }`}
                 >

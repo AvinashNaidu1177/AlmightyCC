@@ -279,7 +279,7 @@ const getFileIcon = (ext: string) => {
     if (["pdf"].includes(e)) return <FileText className="w-5 h-5 text-red-600" />;
     if (["zip", "rar", "7z"].includes(e)) return <FileArchive className="w-5 h-5 text-yellow-600" />;
     if (["mp4", "mov", "avi"].includes(e)) return <FileVideo className="w-5 h-5 text-purple-600" />;
-    if (["xlsx", "xls", "csv"].includes(e)) return <FileSpreadsheet className="w-5 h-5 text-green-600" />;
+    if (["xlsx", "xls", "csv"].includes(e)) return <FileSpreadsheet className="w-5 h-5 text-purple-600" />;
     if (["js", "ts", "json", "html", "css", "py"].includes(e)) return <FileCode className="w-5 h-5 text-indigo-600" />;
     return <File className="w-5 h-5" />;
 }

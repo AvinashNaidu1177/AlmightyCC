@@ -1,5 +1,7 @@
+import { brandingConfig } from "../../lib/branding.config";
+
 export const metadata = {
-    title: "Upload Files - Unicc",
+    title: `Upload Files - ${brandingConfig.appName}`,
     description: "Upload Now, access later",
 };
 

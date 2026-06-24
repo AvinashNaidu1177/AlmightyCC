@@ -70,7 +70,7 @@ function LocalStorageItem({ storageKey, value, onDelete }: LocalStorageItemProps
                         onClick={() => {navigator.clipboard.writeText(parsedValue); setCopied(true); setTimeout(() => setCopied(false), 2000);}}
                         className="hover:cursor-pointer text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 midnight:hover:text-blue-400 transition cursor-pointer"
                     >
-                        {copied ? <Check size={18} className="text-green-500 dark:text-green-400" /> : <Copy size={18} />}
+                        {copied ? <Check size={18} className="text-purple-500 dark:text-purple-400" /> : <Copy size={18} />}
                     </button>
                     <button
                         onClick={onDelete}

@@ -106,7 +106,7 @@ export default function CourseCard({ a, onClick, activeDay, isHoliday, decimalVa
                                 );
                             } else {
                                 return (
-                                    <p className="text-green-500 dark:text-green-400 midnight:text-green-400 text-sm">
+                                    <p className="text-purple-500 dark:text-purple-400 midnight:text-purple-400 text-sm">
                                         Can miss <strong>{canMissValue}</strong> {lab ? "lab" : "class"}
                                         {canMissValue !== 1 && (lab ? "s" : "es")} and stay above 75%.
                                     </p>
@@ -126,7 +126,7 @@ export default function CourseCard({ a, onClick, activeDay, isHoliday, decimalVa
                                     ? "#EF4444"
                                     : a.attendancePercentage < 85
                                         ? "#FACC15"
-                                        : "#2df04aff",
+                                        : "#A855F7",
                             textColor: "currentColor",
                             trailColor: "#CBD5E1",
                             strokeLinecap: "round",

@@ -7,6 +7,7 @@ import { Button } from "../../ui/button";
 import DataPage from "./DataPage";
 import PrivacyPolicyPage from "./PrivacyPolicy";
 import TermsOfServicePage from "./TermsOfService";
+import { brandingConfig } from "../../../lib/branding.config";
 
 type FooterProps = {
   isLoggedIn: boolean;
@@ -67,7 +68,7 @@ export default function Footer({ isLoggedIn }: FooterProps) {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Button variant="outline" size="icon" asChild>
             <a
-              href="https://github.com/Arya4930/UniCC"
+              href={brandingConfig.urls.repository}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -79,7 +80,7 @@ export default function Footer({ isLoggedIn }: FooterProps) {
           </Button>
           <Button variant="outline" size="icon" asChild>
             <a
-              href="https://arya22.vercel.app/"
+              href={brandingConfig.urls.api}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -91,7 +92,7 @@ export default function Footer({ isLoggedIn }: FooterProps) {
           </Button>
 
           <p className="text-sm font-medium tracking-wide px-5">
-            Made for No reason<br></br>By My heart{" "}
+            Powered by {brandingConfig.appName}{" "}
             {/* <span className="ml-2 text-xs text-gray-400">v0.1.3</span> */}
           </p>
 
@@ -102,12 +103,24 @@ export default function Footer({ isLoggedIn }: FooterProps) {
         </div>
 
         <span className="text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400 block">
-          &copy; {new Date().getFullYear()} Arya Evil Inc. All rights reserved. &nbsp;
+          &copy; {new Date().getFullYear()} {brandingConfig.appName}. All rights reserved. &nbsp;
         </span>
         <div>
+          <a
+            href="/ffcs"
+            className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+          >
+            FFCS Planner
+          </a> • 
+          <a
+            href="/faculty"
+            className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+          >
+            Faculty Info
+          </a> • 
           <Button
             variant="ghost"
-            className="mt-2 w-18 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
+            className="mt-2 ml-1 w-18 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"
             onClick={() => setShowPolicy(true)}
           >
             Privacy Policy

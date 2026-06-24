@@ -59,7 +59,7 @@ export default function Links() {
                                 className="ml-3 p-2 rounded-md bg-gray-300 dark:bg-slate-700 midnight:bg-gray-800 hover:bg-gray-400 dark:hover:bg-slate-600 transition-colors"
                             >
                                 {copiedIndex === index ? (
-                                    <Check className="w-4 h-4 text-green-500 scale-110 transition-transform duration-300" />
+                                    <Check className="w-4 h-4 text-purple-500 scale-110 transition-transform duration-300" />
                                 ) : (
                                     <Copy className="w-4 h-4 text-gray-700 dark:text-gray-200 midnight:text-gray-300" />
                                 )}

@@ -53,7 +53,7 @@ export default function vitolDisplay({ vitolData, handleFetchVitol, setVitolData
                                     </h2>
 
                                     {item.done ? (
-                                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                        <CheckCircle className="w-5 h-5 text-purple-500 flex-shrink-0" />
                                     ) : isOverdue ? (
                                         <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
                                     ) : (
@@ -68,7 +68,7 @@ export default function vitolDisplay({ vitolData, handleFetchVitol, setVitolData
                             <div className="mt-3 flex items-center justify-between">
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs ${item.done
-                                        ? "bg-green-200 text-green-800"
+                                        ? "bg-purple-200 text-purple-800"
                                         : isOverdue
                                             ? "bg-red-200 text-red-800"
                                             : "bg-yellow-200 text-yellow-800"

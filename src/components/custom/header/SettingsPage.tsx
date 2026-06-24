@@ -1,6 +1,7 @@
 "use client";
 
 import { X, Save, LogOut, Eye } from "lucide-react";
+import { brandingConfig } from "../../../lib/branding.config";
 import { useState, useEffect } from "react";
 import { Button } from "../../ui/button";
 import config from "../../../../config.json";
@@ -89,7 +90,7 @@ export default function SettingsPage({ handleClose, currSemesterID, setCurrSemes
                     >
                         Change VTOP Credentials{" "}
                         <span className="text-xs text-gray-800 dark:text-gray-600 midnight:text-gray-500">
-                            (Inside UniCC)
+                            (Inside {brandingConfig.appName})
                         </span>
                     </label>
 

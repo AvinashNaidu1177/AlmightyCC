@@ -35,14 +35,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const APP_NAME = "Uni CC";
-const APP_DESCRIPTION = "Showing data from VTOP in a clean and simple way.";
+import { brandingConfig } from "../lib/branding.config";
+
+const APP_NAME = brandingConfig.appName;
+const APP_DESCRIPTION = brandingConfig.description;
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
     default: APP_NAME,
-    template: "%s - UniCC App",
+    template: `%s - ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
   manifest: "/manifest.json",

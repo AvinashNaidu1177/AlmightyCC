@@ -63,7 +63,7 @@ export default function StatsCards({
               </span>
               <span
                 className={`text-base font-bold ${feedbackStatus?.MidSem?.Curriculum && feedbackStatus?.MidSem?.Course
-                    ? "text-green-500"
+                    ? "text-purple-500"
                     : "text-red-500"
                   }`}
               >
@@ -81,7 +81,7 @@ export default function StatsCards({
               </span>
               <span
                 className={`text-base font-bold ${feedbackStatus?.EndSem?.Curriculum && feedbackStatus?.EndSem?.Course
-                    ? "text-green-500"
+                    ? "text-purple-500"
                     : "text-red-500"
                   }`}
               >

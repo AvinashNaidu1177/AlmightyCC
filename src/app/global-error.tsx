@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import ErrorDiagnosticCard from "@/components/custom/ErrorDiagnosticCard";
+import { brandingConfig } from "../lib/branding.config";
 
 type ErrorWithDigest = Error & { digest?: string };
 
@@ -13,7 +14,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("[UniCC global app error]", error);
+    console.error(`[${brandingConfig.appName} global app error]`, error);
   }, [error]);
 
   return (

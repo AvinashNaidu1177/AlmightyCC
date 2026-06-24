@@ -342,7 +342,7 @@ export default function OverallAttendancePredictor({
                 ? "text-red-500"
                 : p.predictedPercent < 85
                   ? "text-yellow-400"
-                  : "text-green-400"
+                  : "text-purple-400"
                 }`}
             >
               {p.predictedAttended}/{p.predictedTotal} ({p.predictedPercent}%)

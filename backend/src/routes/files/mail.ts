@@ -76,9 +76,9 @@ router.post("/", upload.array("files"), async (req, res) => {
         }));
 
         await mailTransporter.sendMail({
-            from: `Unicc <${process.env.SMTP_USER}>`,
+            from: `AlmightyCC <${process.env.SMTP_USER}>`,
             to: to.toString(),
-            subject: subject ? subject.toString() : "Files from Uni-cc",
+            subject: subject ? subject.toString() : "Files from AlmightyCC",
             text: `Your files, sent on ${new Date().toLocaleString()}`,
             attachments: attachment,
         });

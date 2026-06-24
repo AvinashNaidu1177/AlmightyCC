@@ -89,7 +89,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
 
             {gpa && (
                 <div className="mt-4 text-center">
-                    <span className="text-lg font-semibold text-green-700 dark:text-green-400">
+                    <span className="text-lg font-semibold text-purple-700 dark:text-purple-400">
                         GPA: {gpa}
                     </span>
                 </div>
@@ -117,7 +117,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
                                 <div className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-medium whitespace-nowrap">
                                     Grade: {course.grade}
                                 </div>
-                                <div className="px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 font-medium whitespace-nowrap">
+                                <div className="px-3 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 font-medium whitespace-nowrap">
                                     Total: {course.grandTotal}
                                 </div>
                             </div>

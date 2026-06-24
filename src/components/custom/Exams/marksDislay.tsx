@@ -129,7 +129,7 @@ export default function MarksDisplay({ data }) {
                       totals.weightPercent
                     )}`}
                     styles={buildStyles({
-                      pathColor: "#00ff11ff",
+                      pathColor: "#A855F7",
                       textColor: "currentColor",
                       trailColor: "#E5E7EB",
                       strokeLinecap: "round",
