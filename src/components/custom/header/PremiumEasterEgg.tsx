@@ -9,11 +9,12 @@ export default function PremiumEasterEgg() {
   const [showPricing, setShowPricing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPirateModal, setShowPirateModal] = useState(false);
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Lock scrolling when cinematic or modals are active
   useEffect(() => {
-    if (isPlaying || showPricing || showPirateModal) {
+    if (isPlaying || showPricing || showPirateModal || showMobileWarning) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -21,7 +22,7 @@ export default function PremiumEasterEgg() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isPlaying, showPricing, showPirateModal]);
+  }, [isPlaying, showPricing, showPirateModal, showMobileWarning]);
 
   // Handle escape key specifically for the cinematic
   useEffect(() => {
@@ -39,6 +40,13 @@ export default function PremiumEasterEgg() {
 
   const handlePlanClick = () => {
     setShowPricing(false);
+
+    // Detect if device is mobile or tablet (less than 1024px width)
+    if (window.innerWidth < 1024) {
+      setShowMobileWarning(true);
+      return;
+    }
+
     setIsPlaying(true);
     // Play video
     if (videoRef.current) {
@@ -137,6 +145,46 @@ export default function PremiumEasterEgg() {
                   <button className="w-full py-2 rounded-lg bg-gray-800 text-white font-medium group-hover:bg-purple-600 transition-colors mt-auto">
                     Select Plan
                   </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Warning Modal */}
+      <AnimatePresence>
+        {showMobileWarning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className="bg-[#0a0a0f] border border-gray-800 rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl shadow-purple-900/20 relative"
+            >
+              <div className="p-8 text-center space-y-4">
+                <div className="text-5xl mb-6 animate-pulse">🏴‍☠️</div>
+                <h2 className="text-2xl font-bold text-white tracking-tight">Desktop Exclusive</h2>
+                
+                <div className="space-y-4 text-gray-300 text-sm leading-relaxed">
+                  <p>This cinematic was created for the full desktop experience.</p>
+                  <p>Open AlmightyCC on your PC to experience the Pirate Premium reveal exactly as intended.</p>
+                  <p className="text-purple-400 font-medium pt-2 block">Trust me...<br/>It's worth it.</p>
+                </div>
+
+                <div className="pt-6">
+                  <Button 
+                    onClick={() => setShowMobileWarning(false)}
+                    className="w-full bg-purple-600 hover:bg-purple-500 text-white transition-colors"
+                  >
+                    Got it
+                  </Button>
                 </div>
               </div>
             </motion.div>
