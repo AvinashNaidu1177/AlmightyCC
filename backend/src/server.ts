@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import { startCleanupCron } from "./lib/cleanupExpiredFiles";
 
 import statusRoutes from "./routes/status";
@@ -31,10 +32,31 @@ import { vitolReminder } from "./lib/VitolReminder";
 
 import { swaggerSpec } from "./lib/clients/swagger";
 import swaggerUi from "swagger-ui-express";
+import { loginLimiter, fileTransferLimiter, generalApiLimiter } from "./middleware/rateLimiter";
 
 const app: Application = express();
 
-app.use(cors());
+// Secure Headers with Helmet (CSP disabled to prevent breaking changes as requested)
+app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+}));
+
+// CORS Configuration
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+    ? process.env.ALLOWED_ORIGINS.split(",") 
+    : ["http://localhost:3000", "http://localhost:3001"];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true
+}));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -56,18 +78,18 @@ app.use("/api/files/fetch", fetchFiles);
 
 app.use("/api", routeLogger);
 
-app.use("/api/calendar", calendarRoutes);
-app.use("/api/login", loginRoutes);
-app.use("/api/hostel", hostelRoutes);
-app.use("/api/grades", gradesRoutes);
-app.use("/api/schedule", scheduleRoutes);
-app.use("/api/attendance", attendanceRoutes);
-app.use("/api/all-grades", allGradesRoutes);
-app.use("/api/files/upload", UploadFile);
-app.use("/api/files/delete", deleteFile);
-app.use("/api/files/download", downloadFile);
-app.use("/api/lms-data", fetchLMSdata);
-app.use("/api/vitol-data", fetchVitoldata);
+app.use("/api/calendar", generalApiLimiter, calendarRoutes);
+app.use("/api/login", loginLimiter, loginRoutes);
+app.use("/api/hostel", generalApiLimiter, hostelRoutes);
+app.use("/api/grades", generalApiLimiter, gradesRoutes);
+app.use("/api/schedule", generalApiLimiter, scheduleRoutes);
+app.use("/api/attendance", generalApiLimiter, attendanceRoutes);
+app.use("/api/all-grades", generalApiLimiter, allGradesRoutes);
+app.use("/api/files/upload", fileTransferLimiter, UploadFile);
+app.use("/api/files/delete", fileTransferLimiter, deleteFile);
+app.use("/api/files/download", fileTransferLimiter, downloadFile);
+app.use("/api/lms-data", generalApiLimiter, fetchLMSdata);
+app.use("/api/vitol-data", generalApiLimiter, fetchVitoldata);
 app.use("/api/notifications/subscribe", subscribe);
 app.use("/api/notifications/unsubscribe", unsubscribe);
 app.use("/api/notifications/config", notifConfig);

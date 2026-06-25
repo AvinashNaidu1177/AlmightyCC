@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from "express";
+import { validateVtopSession } from "../middleware/validateSession";
 import * as cheerio from "cheerio";
 import LMSClient from "../lib/clients/LMSClient";
 import { maskUserID } from "../lib/mask";
@@ -81,7 +82,7 @@ interface Assingment {
  *                   type: string
  */
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", validateVtopSession, async (req: Request, res: Response) => {
     try {
         const { username, pass } = req.body;
         if (!username || !pass) {
@@ -125,7 +126,7 @@ router.post("/", async (req: Request, res: Response) => {
         return res.status(200).json(result);
     } catch (err: any) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

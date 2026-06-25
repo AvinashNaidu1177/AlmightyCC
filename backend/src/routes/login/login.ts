@@ -89,6 +89,11 @@ const router: Router = express.Router();
 router.post("/", async (req: Request, res: Response) => {
     try {
         const { username, password }: LoginRequestBody = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({ success: false, error: "Username and password are required" });
+        }
+
         const captchaRes = await getCaptcha();
         if("error" in captchaRes){
             return res.status(500).json({ success: false, error: captchaRes.error });

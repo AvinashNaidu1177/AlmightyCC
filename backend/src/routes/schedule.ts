@@ -1,4 +1,5 @@
 import express, { Request, Response, Router } from "express";
+import { validateVtopSession } from "../middleware/validateSession";
 import VTOPClient from "../lib/clients/VTOPClient";
 import * as cheerio from "cheerio";
 import { URLSearchParams } from "url";
@@ -88,7 +89,7 @@ import { ExamItem, Schedule } from "../types/data/schedule";
 
 const router: Router = express.Router();
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", validateVtopSession, async (req: Request, res: Response) => {
     try {
         const { cookies, authorizedID, csrf, semesterId }: RequestBody = req.body;
 
@@ -156,7 +157,7 @@ router.post("/", async (req: Request, res: Response) => {
         });
     } catch (err: any) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

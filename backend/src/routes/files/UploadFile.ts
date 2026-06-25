@@ -95,10 +95,33 @@ const router: Router = express.Router({ mergeParams: true });
  *                   example: Upload failed
  */
 
-const upload = multer();
-
-const MAX_STORAGE = 5 * 1024 * 1024;
+const MAX_STORAGE = 5 * 1024 * 1024; // 5MB Limit per file/user
 const ADMINS = (process.env.ADMINS || "").split(",").map(id => id.trim());
+
+const allowedMimeTypes = [
+    "application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "text/plain", "image/png", "image/jpeg", "image/webp"
+];
+
+const allowedExtensions = [
+    ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx", ".txt",
+    ".png", ".jpg", ".jpeg", ".webp"
+];
+
+const upload = multer({
+    limits: {
+        fileSize: MAX_STORAGE,
+    },
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (!allowedMimeTypes.includes(file.mimetype) || !allowedExtensions.includes(ext)) {
+            return cb(new Error("Invalid file type. Only standard documents and images are allowed. Executables are strictly prohibited."));
+        }
+        cb(null, true);
+    }
+});
 
 router.post("/:userID", upload.single("file"), async (req, res) => {
     try {
@@ -149,9 +172,13 @@ router.post("/:userID", upload.single("file"), async (req, res) => {
             isAdmin
         });
 
-    } catch (err) {
-        console.error("Upload Error:", err);
-        res.status(500).json({ error: "Upload failed" });
+    } catch (err: any) {
+        console.error("Upload Error:", err.message || err);
+        // Do not expose stack traces to client
+        if (err.message && err.message.includes("Invalid file type")) {
+            return res.status(400).json({ error: err.message });
+        }
+        res.status(500).json({ error: "Upload failed due to an internal server error" });
     }
 });
 

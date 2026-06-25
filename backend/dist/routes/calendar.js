@@ -37,6 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const validateSession_1 = require("../middleware/validateSession");
 const VTOPClient_1 = __importDefault(require("../lib/clients/VTOPClient"));
 const cheerio = __importStar(require("cheerio"));
 const url_1 = require("url");
@@ -125,7 +126,7 @@ const router = express_1.default.Router();
  *                 error:
  *                   type: string
  */
-router.post("/", async (req, res) => {
+router.post("/", validateSession_1.validateVtopSession, async (req, res) => {
     try {
         let { cookies, authorizedID, csrf, type, semesterId } = req.body;
         if (semesterId?.toString().endsWith("05")) {
@@ -211,7 +212,7 @@ router.post("/", async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 function addHolidayToCalendar(calendar, dayNum, eventObj) {

@@ -1,1 +1,1 @@
-{"version":3,"file":"hostel.d.ts","sourceRoot":"","sources":["../../src/routes/hostel.ts"],"names":[],"mappings":"AAMA,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAEtC,QAAA,MAAM,MAAM,EAAE,MAAyB,CAAC;AAoQxC,eAAe,MAAM,CAAC"}
+{"version":3,"file":"hostel.d.ts","sourceRoot":"","sources":["../../src/routes/hostel.ts"],"names":[],"mappings":"AAOA,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAEtC,QAAA,MAAM,MAAM,EAAE,MAAyB,CAAC;AAoQxC,eAAe,MAAM,CAAC"}

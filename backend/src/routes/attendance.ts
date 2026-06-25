@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { validateVtopSession } from "../middleware/validateSession";
 import VTOPClient from "../lib/clients/VTOPClient";
 import * as cheerio from "cheerio";
 import { URLSearchParams } from "url";
@@ -160,7 +161,7 @@ function mergeAttendanceWithTimetable(attendance: attendanceItem[], timetable: c
     return merged;
 }
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", validateVtopSession, async (req: Request, res: Response) => {
     try {
         const { cookies, authorizedID, csrf, semesterId }: RequestBody = req.body;
 
@@ -298,7 +299,7 @@ router.post("/", async (req: Request, res: Response) => {
         return res.status(200).json({ attRes: { semester: semesterId, attendance: detailedAttendance }, marksRes: marksRes });
     } catch (err: any) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
@@ -313,7 +314,7 @@ router.get("/marks", async (req: Request, res: Response) => {
         return res.status(200).json(stats);
     } catch (err: any) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
 const cleanupExpiredFiles_1 = require("./lib/cleanupExpiredFiles");
 const status_1 = __importDefault(require("./routes/status"));
 const calendar_1 = __importDefault(require("./routes/calendar"));
@@ -34,8 +35,28 @@ const web_push_1 = __importDefault(require("web-push"));
 const VitolReminder_1 = require("./lib/VitolReminder");
 const swagger_1 = require("./lib/clients/swagger");
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const rateLimiter_1 = require("./middleware/rateLimiter");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+// Secure Headers with Helmet (CSP disabled to prevent breaking changes as requested)
+app.use((0, helmet_1.default)({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+}));
+// CORS Configuration
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(",")
+    : ["http://localhost:3000", "http://localhost:3001"];
+app.use((0, cors_1.default)({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true
+}));
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((req, res, next) => {
@@ -51,18 +72,18 @@ app.use("/api/status", status_1.default);
 app.use("/stats", stats_1.default);
 app.use("/api/files/fetch", fetchFiles_1.default);
 app.use("/api", Logger_1.routeLogger);
-app.use("/api/calendar", calendar_1.default);
-app.use("/api/login", login_1.default);
-app.use("/api/hostel", hostel_1.default);
-app.use("/api/grades", grades_1.default);
-app.use("/api/schedule", schedule_1.default);
-app.use("/api/attendance", attendance_1.default);
-app.use("/api/all-grades", allGrades_1.default);
-app.use("/api/files/upload", UploadFile_1.default);
-app.use("/api/files/delete", deleteFile_1.default);
-app.use("/api/files/download", downloadFile_1.default);
-app.use("/api/lms-data", FetchLMSdata_1.default);
-app.use("/api/vitol-data", FetchVitoldata_1.default);
+app.use("/api/calendar", rateLimiter_1.generalApiLimiter, calendar_1.default);
+app.use("/api/login", rateLimiter_1.loginLimiter, login_1.default);
+app.use("/api/hostel", rateLimiter_1.generalApiLimiter, hostel_1.default);
+app.use("/api/grades", rateLimiter_1.generalApiLimiter, grades_1.default);
+app.use("/api/schedule", rateLimiter_1.generalApiLimiter, schedule_1.default);
+app.use("/api/attendance", rateLimiter_1.generalApiLimiter, attendance_1.default);
+app.use("/api/all-grades", rateLimiter_1.generalApiLimiter, allGrades_1.default);
+app.use("/api/files/upload", rateLimiter_1.fileTransferLimiter, UploadFile_1.default);
+app.use("/api/files/delete", rateLimiter_1.fileTransferLimiter, deleteFile_1.default);
+app.use("/api/files/download", rateLimiter_1.fileTransferLimiter, downloadFile_1.default);
+app.use("/api/lms-data", rateLimiter_1.generalApiLimiter, FetchLMSdata_1.default);
+app.use("/api/vitol-data", rateLimiter_1.generalApiLimiter, FetchVitoldata_1.default);
 app.use("/api/notifications/subscribe", subscribe_1.default);
 app.use("/api/notifications/unsubscribe", unsubscribe_1.default);
 app.use("/api/notifications/config", config_1.default);

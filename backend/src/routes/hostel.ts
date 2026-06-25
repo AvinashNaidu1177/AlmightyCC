@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { validateVtopSession } from "../middleware/validateSession";
 import VTOPClient from "../lib/clients/VTOPClient";
 import { RequestBody } from "../types/custom";
 import { hostel, leaveItem } from "../types/data/hostel";
@@ -88,7 +89,7 @@ const router: Router = express.Router();
  *                   type: string
  */
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", validateVtopSession, async (req: Request, res: Response) => {
     try {
         const { cookies, authorizedID, csrf }: RequestBody = req.body;
 
@@ -262,7 +263,7 @@ router.post("/", async (req: Request, res: Response) => {
         return res.status(200).json({ hostelInfo, leaveHistory });
     } catch (err: any) {
         console.error(err);
-        return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
