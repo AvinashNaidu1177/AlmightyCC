@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { User, Mail, Phone, MapPin, Briefcase, Users, GraduationCap } from "lucide-react";
 
@@ -19,8 +20,22 @@ type FacultyCourseInfo = {
 };
 
 export default function FacultyPage() {
+ const router = useRouter();
+ const [isAuth, setIsAuth] = useState<boolean | null>(null);
  const [proctor, setProctor] = useState<ProctorInfo | null>(null);
  const [facultyList, setFacultyList] = useState<FacultyCourseInfo[]>([]);
+
+ useEffect(() => {
+    const checkAuth = () => {
+        const ids = localStorage.getItem("IDs");
+        if (!ids) {
+            router.push("/");
+        } else {
+            setIsAuth(true);
+        }
+    };
+    checkAuth();
+ }, [router]);
 
  useEffect(() => {
  try {
@@ -64,9 +79,17 @@ export default function FacultyPage() {
  }
  }
  } catch (e) {
- console.error("Failed to parse faculty data:", e);
+ console.error("Failed to parse faculty data from local storage", e);
  }
  }, []);
+
+ if (isAuth === null) {
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
+            <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    );
+ }
 
  return (
  <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-gray-100 p-4 md:p-8">
@@ -83,7 +106,7 @@ export default function FacultyPage() {
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Proctor Section */}
  <div className="md:col-span-1 space-y-6">
- <Card className="dark:bg-[#111827] border-purple-200 dark:border-purple-900/50 shadow-md shadow-purple-500/10">
+ <Card className="dark:bg-[#0a0a0f] border-purple-200 dark:border-purple-900/50 shadow-md shadow-purple-500/10">
  <CardHeader className="bg-purple-50 dark:bg-purple-900/10 border-b border-purple-100 dark:border-purple-900/30">
  <CardTitle className="text-purple-400 text-lg flex items-center gap-2">
  <User className="w-5 h-5" />
@@ -127,7 +150,7 @@ export default function FacultyPage() {
 
  {/* Faculty Section */}
  <div className="md:col-span-2 space-y-6">
- <Card className="dark:bg-[#111827] border-gray-800">
+ <Card className="dark:bg-[#0a0a0f] border-gray-800">
  <CardHeader className="border-b border-gray-800">
  <CardTitle className="text-purple-500 text-lg flex items-center gap-2">
  <Users className="w-5 h-5" />

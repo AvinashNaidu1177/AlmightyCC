@@ -50,7 +50,7 @@ export default function FFCSSummary({ courses }: { courses: Course[] }) {
  <th className="px-4 py-3 border-b dark:border-gray-800 text-right">Cr</th>
  </tr>
  </thead>
- <tbody className="divide-y divide-gray-800 bg-[#111827]">
+ <tbody className="divide-y divide-gray-800 bg-[#0a0a0f]">
  {calculatedCourses.map((c, i) => (
  <tr key={c.id} className={c.hasConflict ? "bg-red-900/10 border-l-4 border-l-red-500" : "hover:bg-gray-800/50"}>
  <td className="px-4 py-3 font-mono text-gray-500">{i + 1}</td>
@@ -96,7 +96,7 @@ export default function FFCSSummary({ courses }: { courses: Course[] }) {
  </div>
  )}
  {nConflict === 0 && totalCr <= 30 && courses.length > 0 && (
- <div className="flex items-center gap-3 p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-400 text-sm">
+ <div className="flex items-center gap-3 p-4 rounded-lg bg-purple-900/20 border border-purple-800 text-purple-400 text-sm">
  <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
  <div><strong>STATUS OK:</strong> No conflicts. Credits within limit. Your timetable is ready.</div>
  </div>

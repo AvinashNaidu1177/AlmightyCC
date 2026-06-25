@@ -215,6 +215,24 @@ router.post("/", async (req, res) => {
                         hostelInfo.messInfo = "NOT ALLOTED";
                 }
             }
+            const labelLower = label.toLowerCase();
+            if (labelLower.includes("proctor") && labelLower.includes("name")) {
+                hostelInfo.proctorName = value;
+            }
+            else if (labelLower.includes("proctor") && labelLower.includes("email")) {
+                hostelInfo.proctorEmail = value;
+            }
+            else if (labelLower.includes("proctor") && labelLower.includes("mobile")) {
+                hostelInfo.proctorMobile = value;
+            }
+            else if (labelLower.includes("proctor") && labelLower.includes("designation")) {
+                hostelInfo.proctorDesignation = value;
+            }
+            else if (labelLower.includes("faculty advisor") && labelLower.includes("name")) {
+                // Sometimes it's called Faculty Advisor
+                if (!hostelInfo.proctorName)
+                    hostelInfo.proctorName = value;
+            }
         });
         const leaveMap = new Map();
         leaveRows.each((_, row) => {

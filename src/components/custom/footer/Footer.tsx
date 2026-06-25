@@ -95,18 +95,22 @@ export default function Footer({ isLoggedIn }: FooterProps) {
  &copy; {new Date().getFullYear()} {brandingConfig.appName}. All rights reserved. &nbsp;
  </span>
  <div>
- <a
- href="/ffcs"
- className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
- >
- FFCS Planner
- </a> • 
- <a
- href="/faculty"
- className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
- >
- Faculty Info
- </a> • 
+ {isLoggedIn && (
+   <>
+    <a
+    href="/ffcs"
+    className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+    >
+    FFCS Planner
+    </a> • 
+    <a
+    href="/faculty"
+    className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
+    >
+    Faculty Info
+    </a> • 
+   </>
+ )}
  <Button
  variant="ghost"
  className="mt-2 ml-1 w-18 h-6 underline text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400"

@@ -12,15 +12,27 @@ import FFCSTimetableGrid, { Course } from "@/components/custom/ffcs/FFCSTimetabl
 import FFCSSummary from "@/components/custom/ffcs/FFCSSummary";
 import FFCSControls from "@/components/custom/ffcs/FFCSControls";
 import { toast } from "sonner";
-// Removed useToast
-
-
+import { useRouter } from "next/navigation";
 
 export default function FFCSPage() {
-    // Removed toast init
+    const router = useRouter();
+    const [isAuth, setIsAuth] = useState<boolean | null>(null);
     const [courses, setCourses] = useState<Course[]>([]);
     const [activeTab, setActiveTab] = useState<"add" | "timetable" | "summary">("add");
     const [currentPane, setCurrentPane] = useState<"theory" | "lab">("theory");
+
+    // Auth check on mount
+    useEffect(() => {
+        const checkAuth = () => {
+            const ids = localStorage.getItem("IDs");
+            if (!ids) {
+                router.push("/");
+            } else {
+                setIsAuth(true);
+            }
+        };
+        checkAuth();
+    }, [router]);
 
     // Load persisted data on mount
     useEffect(() => {
@@ -43,18 +55,32 @@ export default function FFCSPage() {
     }, [courses]);
 
     const handleClearAll = () => {
-        if (confirm("Remove ALL courses from your timetable? This cannot be undone.")) {
-            setCourses([]);
-            toast.success("All courses cleared.");
-        }
+        toast("Remove ALL courses from your timetable?", {
+            description: "This cannot be undone.",
+            action: {
+                label: "Confirm",
+                onClick: () => {
+                    setCourses([]);
+                    toast.success("All courses cleared.");
+                }
+            }
+        });
     };
 
+    if (isAuth === null) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
+                <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] text-gray-900 dark:text-gray-100 midnight:text-gray-100 p-4 md:p-8 overflow-x-hidden">
+        <div className="flex flex-col min-h-screen bg-[#0a0a0f] dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] text-gray-200 dark:text-gray-100 midnight:text-gray-100 p-4 md:p-8 overflow-x-hidden">
             <div className="max-w-7xl mx-auto w-full space-y-6">
                 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4">
+                <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-800 dark:border-gray-800 pb-4">
                     <div className="flex items-center gap-4">
                         <Button variant="ghost" asChild>
                             <a href="/">← Back</a>
@@ -75,7 +101,7 @@ export default function FFCSPage() {
                 <div className="mt-6">
                     {activeTab === "add" && (
                         <div className="space-y-6">
-                            <Card className="dark:bg-[#111827] midnight:bg-[#111827] border-gray-200 dark:border-gray-800">
+                            <Card className="dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] border-gray-800 dark:border-gray-800">
                                 <CardHeader>
                                     <CardTitle className="text-purple-500 text-lg">Course Details</CardTitle>
                                 </CardHeader>
@@ -87,7 +113,7 @@ export default function FFCSPage() {
                     )}
 
                     {activeTab === "timetable" && (
-                        <Card className="dark:bg-[#111827] midnight:bg-[#111827] border-gray-200 dark:border-gray-800">
+                        <Card className="dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] border-gray-800 dark:border-gray-800">
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <CardTitle className="text-purple-500 text-lg">Timetable View</CardTitle>
                                 <Button variant="outline" size="sm">Export</Button>
@@ -99,7 +125,7 @@ export default function FFCSPage() {
                     )}
 
                     {activeTab === "summary" && (
-                        <Card className="dark:bg-[#111827] midnight:bg-[#111827] border-gray-200 dark:border-gray-800">
+                        <Card className="dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] border-gray-800 dark:border-gray-800">
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <CardTitle className="text-purple-500 text-lg">Summary & Conflicts</CardTitle>
                                 <Button variant="destructive" size="sm" onClick={handleClearAll}>Clear All</Button>

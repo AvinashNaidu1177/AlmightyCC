@@ -20,7 +20,7 @@ export default function LoginForm({
  {/* App name */}
  <div className="text-center mb-8 space-y-2">
  <h1 className="text-3xl font-bold text-gray-300 dark:text-gray-200 ">
- Uni&nbsp;CC
+ AlmightyCC
  </h1>
  <p className="text-gray-400 dark:text-gray-300 midnight:text-gray-400 max-w-md mx-auto">
  Showing data from VTOP in a clean and simple way.

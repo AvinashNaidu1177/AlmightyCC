@@ -99,17 +99,7 @@ export default function FFCSControls({ courses, setCourses }: { courses: Course[
  }
  };
 
- const handleAddCourse = () => {
- if (!form.code.trim()) {
- toast.error("Course code is required.");
- return;
- }
-
- const isDuplicate = courses.some(c => c.code.toUpperCase() === form.code.toUpperCase() && c.id !== editingId);
- if (isDuplicate) {
- if (!confirm(`Course code ${form.code} already exists. Are you sure you want to add it anyway?`)) return;
- }
-
+ const executeAddCourse = () => {
  const credits = Number(form.credits);
  if (form.credits.trim() !== "" && (!Number.isInteger(credits) || credits < 0)) {
  toast.error("Invalid credits value.");
@@ -144,14 +134,37 @@ export default function FFCSControls({ courses, setCourses }: { courses: Course[
 
  updatedCourses = recalcConflicts(updatedCourses);
  setCourses(updatedCourses);
- clearForm();
-
+ setForm({ code: "", name: "", faculty: "", room: "", credits: "" });
+ setSelectedCombos([]);
+ setEditingId(null);
+ 
  const savedCourse = updatedCourses.find(c => c.id === newCourse.id);
  if (savedCourse && savedCourse.hasConflict) {
  toast.warning(`Warning: ${newCourse.code} added, but there is a time clash!`);
  } else {
  toast.success(`${newCourse.code} ${editingId ? "updated" : "added"}.`);
  }
+ };
+
+ const handleAddCourse = () => {
+ if (!form.code.trim()) {
+ toast.error("Course code is required.");
+ return;
+ }
+
+ const isDuplicate = courses.some(c => c.code.toUpperCase() === form.code.toUpperCase() && c.id !== editingId);
+ if (isDuplicate) {
+ toast(`Course code ${form.code} already exists.`, {
+ description: "Are you sure you want to add it anyway?",
+ action: {
+ label: "Confirm",
+ onClick: () => executeAddCourse()
+ }
+ });
+ return;
+ }
+ 
+ executeAddCourse();
  };
 
  const editCourse = (c: Course) => {
