@@ -10,6 +10,7 @@ import HeatMapComponent from "./HeatMapComponent";
 import { Switch } from "@/components/ui/switch";
 import Files from "./Files";
 import PushNotificationManager from "@/app/pushNotificationManager";
+import PremiumEasterEgg from "./PremiumEasterEgg";
 
 export default function SettingsPage({ handleClose, currSemesterID, setCurrSemesterID, handleLogin, setIsReloading, handleLogOutRequest, username, password, setPassword, decimalValues, setDecimalValues, loadingScreen, setLoadingScreen }) {
  const [selectedSemester, setSelectedSemester] = useState<string>(currSemesterID);
@@ -179,7 +180,8 @@ export default function SettingsPage({ handleClose, currSemesterID, setCurrSemes
  <div className="w-full max-w-3xl border-t border-gray-700 py-4">
  <PushNotificationManager />
  </div>
- <div className="w-full max-w-3xl border-t border-gray-700 pt-5">
+ <div className="w-full max-w-3xl border-t border-gray-700 pt-5 space-y-4">
+ <PremiumEasterEgg />
  <button
  onClick={handleLogOutRequest}
  className="w-full px-4 py-2 rounded-lg font-medium flex items-center justify-center bg-red-600 hover:bg-red-700 text-white transition-colors"
