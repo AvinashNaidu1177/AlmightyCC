@@ -13,7 +13,7 @@ import FFCSSummary from "@/components/custom/ffcs/FFCSSummary";
 import FFCSControls from "@/components/custom/ffcs/FFCSControls";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Download, CalendarDays, Image as ImageIcon } from "lucide-react";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import { exportToICS } from "@/lib/exportICS";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -79,11 +79,10 @@ export default function FFCSPage() {
         }
 
         try {
-            const canvas = await html2canvas(gridElement, {
+            const dataUrl = await toPng(gridElement, {
                 backgroundColor: "#0a0a0f",
-                scale: 2,
+                pixelRatio: 2,
             });
-            const dataUrl = canvas.toDataURL("image/png");
             const link = document.createElement("a");
             link.href = dataUrl;
             link.download = "AlmightyCC_Timetable.png";
@@ -91,8 +90,8 @@ export default function FFCSPage() {
             link.click();
             document.body.removeChild(link);
             toast.success("Timetable exported as PNG.");
-        } catch (e) {
-            console.error("Export image failed:", e);
+        } catch (error) {
+            console.error(error);
             toast.error("Failed to export image.");
         }
     };
