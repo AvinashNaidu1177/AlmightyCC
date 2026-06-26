@@ -6,9 +6,9 @@ import { toast } from "sonner";
 import { Edit2, Trash2 } from "lucide-react";
 
 const THEORY_GROUPS = {
- single: [["A1"], ["B1"], ["C1"], ["D1"], ["E1"], ["F1"], ["G1"], ["A2"], ["B2"], ["C2"], ["D2"], ["E2"], ["F2"], ["G2"]],
- tut1: [["A1", "TA1"], ["B1", "TB1"], ["C1", "TC1"], ["D1", "TD1"], ["E1", "TE1"], ["F1", "TF1"], ["G1", "TG1"], ["A2", "TA2"], ["B2", "TB2"], ["C2", "TC2"], ["D2", "TD2"], ["E2", "TE2"], ["F2", "TF2"], ["G2", "TG2"]],
- tut2: [["A1", "TA1", "TAA1"], ["B1", "TB1", "TBB1"], ["C1", "TC1", "TCC1"], ["D1", "TD1", "TDD1"], ["E1", "TE1"], ["F1", "TF1"], ["A2", "TA2", "TAA2"], ["B2", "TB2", "TBB2"], ["C2", "TC2", "TCC2"], ["D2", "TD2", "TDD2"]],
+ theory: [["A1"], ["B1"], ["C1"], ["D1"], ["E1"], ["F1"], ["G1"], ["A2"], ["B2"], ["C2"], ["D2"], ["E2"], ["F2"], ["G2"]],
+ tutorial: [["TA1"], ["TB1"], ["TC1"], ["TD1"], ["TE1"], ["TF1"], ["TG1"], ["TA2"], ["TB2"], ["TC2"], ["TD2"], ["TE2"], ["TF2"], ["TG2"]],
+ tutorial2: [["TAA1"], ["TBB1"], ["TCC1"], ["TDD1"], ["TAA2"], ["TBB2"], ["TCC2"], ["TDD2"]],
  special: [["S1"], ["S2"], ["S3"], ["S4"], ["S11"], ["S15"]],
 };
 
@@ -28,7 +28,6 @@ export default function FFCSControls({ courses, setCourses }: { courses: Course[
  const [selectedCombos, setSelectedCombos] = useState<string[][]>([]);
 
  const handleSelectSlot = (combo: string[]) => {
- const isLab = combo[0] && combo[0].startsWith("L");
  let newCombos = [...selectedCombos];
 
  const comboStr = JSON.stringify(combo);
@@ -37,9 +36,8 @@ export default function FFCSControls({ courses, setCourses }: { courses: Course[
  if (exists) {
  newCombos = newCombos.filter(c => JSON.stringify(c) !== comboStr);
  } else {
- if (!isLab) {
- newCombos = newCombos.filter(c => c[0] && c[0].startsWith("L"));
- }
+ // If the user selects a theory or tutorial slot, we shouldn't necessarily wipe out labs. 
+ // They are independent. We just add it to the array of selected items.
  newCombos.push(combo);
  }
  setSelectedCombos(newCombos);
@@ -248,9 +246,9 @@ export default function FFCSControls({ courses, setCourses }: { courses: Course[
 
  {currentPane === "theory" && (
  <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
- {renderSlotGroup("Single Theory Slot", THEORY_GROUPS.single)}
- {renderSlotGroup("Theory + Tutorial (A1+TA1)", THEORY_GROUPS.tut1)}
- {renderSlotGroup("Theory + 2 Tutorials", THEORY_GROUPS.tut2)}
+ {renderSlotGroup("Theory Slots", THEORY_GROUPS.theory)}
+ {renderSlotGroup("Tutorial 1 Slots", THEORY_GROUPS.tutorial)}
+ {renderSlotGroup("Tutorial 2 Slots", THEORY_GROUPS.tutorial2)}
  {renderSlotGroup("Special Slots", THEORY_GROUPS.special)}
  </div>
  )}

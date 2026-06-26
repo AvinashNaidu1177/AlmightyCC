@@ -11,6 +11,10 @@ import {
 import FFCSTimetableGrid, { Course } from "@/components/custom/ffcs/FFCSTimetableGrid";
 import FFCSSummary from "@/components/custom/ffcs/FFCSSummary";
 import FFCSControls from "@/components/custom/ffcs/FFCSControls";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Download, CalendarDays, Image as ImageIcon } from "lucide-react";
+import html2canvas from "html2canvas";
+import { exportToICS } from "@/lib/exportICS";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
@@ -67,6 +71,46 @@ export default function FFCSPage() {
         });
     };
 
+    const handleExportImage = async () => {
+        const gridElement = document.getElementById("ffcs-timetable-grid");
+        if (!gridElement) {
+            toast.error("Timetable not found for export.");
+            return;
+        }
+
+        try {
+            const canvas = await html2canvas(gridElement, {
+                backgroundColor: "#0a0a0f",
+                scale: 2,
+            });
+            const dataUrl = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = "AlmightyCC_Timetable.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            toast.success("Timetable exported as PNG.");
+        } catch (e) {
+            console.error("Export image failed:", e);
+            toast.error("Failed to export image.");
+        }
+    };
+
+    const handleExportICS = () => {
+        if (!courses.length) {
+            toast.error("Add some courses before exporting.");
+            return;
+        }
+        try {
+            exportToICS(courses);
+            toast.success("Timetable exported as .ics calendar.");
+        } catch (e) {
+            console.error("Export ICS failed:", e);
+            toast.error("Failed to export calendar.");
+        }
+    };
+
     if (isAuth === null) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
@@ -116,9 +160,23 @@ export default function FFCSPage() {
                         <Card className="dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] border-gray-800 dark:border-gray-800">
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <CardTitle className="text-purple-500 text-lg">Timetable View</CardTitle>
-                                <Button variant="outline" size="sm">Export</Button>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="outline" size="sm" className="gap-2">
+                                            <Download className="w-4 h-4" /> Export
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end" className="dark:bg-[#0a0a0f] midnight:bg-[#0a0a0f] border-gray-800">
+                                        <DropdownMenuItem onClick={handleExportImage} className="cursor-pointer gap-2 focus:bg-gray-800">
+                                            <ImageIcon className="w-4 h-4 text-purple-400" /> Export as PNG Image
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem onClick={handleExportICS} className="cursor-pointer gap-2 focus:bg-gray-800">
+                                            <CalendarDays className="w-4 h-4 text-pink-400" /> Export as .ics Calendar
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                             </CardHeader>
-                            <CardContent className="overflow-x-auto p-4 md:p-6">
+                            <CardContent className="overflow-x-auto p-4 md:p-6" id="ffcs-timetable-grid">
                                 <FFCSTimetableGrid courses={courses} />
                             </CardContent>
                         </Card>
