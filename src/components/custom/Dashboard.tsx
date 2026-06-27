@@ -332,7 +332,7 @@ export default function DashboardContent({
  setSettings={setSettings}
  />
 
- <div className="bg-gray-900 min-h-screen text-gray-100 transition-colors">
+ <div className="bg-black min-h-screen text-gray-100 transition-colors">
  <StatsCards
  attendancePercentage={attendancePercentage}
  ODhoursData={ODhoursData}

@@ -45,8 +45,8 @@ export default function CourseCard({ a, onClick, activeDay, isHoliday, decimalVa
   onClick={onClick}
   className={`relative overflow-hidden p-5 rounded-2xl cursor-pointer h-full flex flex-col justify-between transition-all duration-300 ease-out
   ${(ongoing && !isHoliday)
-  ? "bg-[#09090b] border border-yellow-500/40 shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(234,179,8,0.25)] hover:border-yellow-400/60"
-  : "bg-[#09090b] border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:border-purple-500/50"
+  ? "bg-gradient-to-br from-[#1c0f30]/80 to-black border border-yellow-500/40 shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(234,179,8,0.25)] hover:border-yellow-400/60"
+  : "bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:border-purple-500/50"
   }`}
   >
   <div className="absolute top-0 left-0 w-[200px] h-[200px] bg-purple-500/10 blur-[50px] pointer-events-none -translate-x-1/2 -translate-y-1/2" />

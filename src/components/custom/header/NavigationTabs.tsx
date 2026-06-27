@@ -33,7 +33,7 @@ export default function NavigationTabs({
   "bg-transparent text-gray-500 hover:text-gray-300 dark:text-gray-400 dark:hover:text-gray-200 border-transparent hover:bg-white/[0.02] dark:hover:bg-white/[0.02]";
 
   return (
-  <div data-scrollable className="flex w-full border-b border-white/5 pb-0 bg-[#09090b] pt-2 px-2 gap-2">
+  <div data-scrollable className="flex w-full border-b border-white/5 pb-0 bg-black pt-2 px-2 gap-2">
  {showSettingsPage && (
  <SettingsPage
  handleClose={() => setShowSettingsPage(false)}

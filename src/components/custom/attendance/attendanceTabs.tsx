@@ -155,11 +155,11 @@ export default function AttendanceTabs({ data, activeDay, setActiveDay, calendar
  return (
   <div className="grid gap-4">
   <div className="flex justify-center items-center gap-3 mb-2 mt-4">
-  <button onClick={() => setShowTimetable(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#09090b] border border-purple-500/30 text-white text-[13px] font-semibold hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
+  <button onClick={() => setShowTimetable(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/30 text-white text-[13px] font-semibold hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
   <Calendar className="w-4 h-4 text-purple-400" />
   Weekly Attendance
   </button>
-  <button onClick={() => setShowPredictor(true)} className="flex items-center justify-center p-2.5 rounded-xl bg-[#09090b] border border-purple-500/30 text-purple-400 hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
+  <button onClick={() => setShowPredictor(true)} className="flex items-center justify-center p-2.5 rounded-xl bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/30 text-purple-400 hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
   <BadgeQuestionMark className="w-4 h-4" />
   </button>
   </div>

@@ -20,7 +20,7 @@ export default function StatsCards({
  : 0;
 
   const cardBase =
-  "relative overflow-hidden cursor-pointer p-5 rounded-xl bg-[#09090b] border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[3px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/40 transition-all duration-300 ease-out flex-shrink-0 snap-start w-[calc(50%-8px)] md:w-[calc(25%-12px)] flex flex-col justify-between text-left min-h-[120px]";
+  "relative overflow-hidden cursor-pointer p-5 rounded-xl bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[3px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/40 transition-all duration-300 ease-out flex-shrink-0 snap-start w-[calc(50%-8px)] md:w-[calc(25%-12px)] flex flex-col justify-between text-left min-h-[120px]";
 
   return (
   <div data-scrollable className="overflow-x-auto snap-x snap-mandatory ml-4 mr-4">
