@@ -8,7 +8,7 @@ const HOLIDAY_KEYWORDS = [
 ];
 
 function normalize(str = ""): string {
- return String(str).toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+ return String(str).toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function isHolidayEvent(e: CalendarEvent): boolean {
