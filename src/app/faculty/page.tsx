@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { User, Mail, Phone, MapPin, Briefcase, Users, GraduationCap } from "lucide-react";
 
-type ProctorInfo = {
- proctorName?: string;
- proctorEmail?: string;
- proctorMobile?: string;
- proctorDesignation?: string;
-};
+ type ProctorInfo = {
+  proctorName?: string;
+  proctorEmail?: string;
+  proctorMobile?: string;
+  proctorDesignation?: string;
+  cabin?: string;
+  school?: string;
+ };
 
 type FacultyCourseInfo = {
  facultyName: string;
@@ -19,11 +21,13 @@ type FacultyCourseInfo = {
  slot: string;
 };
 
-export default function FacultyPage() {
- const router = useRouter();
- const [isAuth, setIsAuth] = useState<boolean | null>(null);
- const [proctor, setProctor] = useState<ProctorInfo | null>(null);
- const [facultyList, setFacultyList] = useState<FacultyCourseInfo[]>([]);
+ export default function FacultyPage() {
+  const router = useRouter();
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const [proctor, setProctor] = useState<ProctorInfo | null>(null);
+  const [isProctorLoading, setIsProctorLoading] = useState(true);
+  const [proctorError, setProctorError] = useState<string | null>(null);
+  const [facultyList, setFacultyList] = useState<FacultyCourseInfo[]>([]);
 
  useEffect(() => {
     const checkAuth = () => {
@@ -39,19 +43,35 @@ export default function FacultyPage() {
 
  useEffect(() => {
  try {
- // Load Proctor from Hostel/Profile data
- const hostelRaw = localStorage.getItem("hostel");
- if (hostelRaw) {
- const parsed = JSON.parse(hostelRaw);
- if (parsed?.hostelInfo) {
- setProctor({
- proctorName: parsed.hostelInfo.proctorName,
- proctorEmail: parsed.hostelInfo.proctorEmail,
- proctorMobile: parsed.hostelInfo.proctorMobile,
- proctorDesignation: parsed.hostelInfo.proctorDesignation,
- });
- }
- }
+  const fetchProctor = async () => {
+   setIsProctorLoading(true);
+   setProctorError(null);
+   try {
+     const ids = localStorage.getItem("IDs");
+     const cookies = localStorage.getItem("cookies");
+     
+     if (!ids || !cookies) return;
+     
+     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/proctor`, {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({ authorizedID: ids, cookies, csrf: "dummy" }),
+     });
+     
+     const data = await response.json();
+     if (data.success && data.proctorInfo) {
+       setProctor(data.proctorInfo);
+     } else {
+       setProctorError(data.message || "Failed to load proctor information");
+     }
+   } catch (err) {
+     setProctorError("Failed to connect to the server.");
+   } finally {
+     setIsProctorLoading(false);
+   }
+  };
+  
+  fetchProctor();
 
  // Load Faculty from Attendance data
  const attRaw = localStorage.getItem("attendance");
@@ -114,36 +134,59 @@ export default function FacultyPage() {
  </CardTitle>
  </CardHeader>
  <CardContent className="pt-6 space-y-4">
- {proctor?.proctorName ? (
- <>
- <div>
- <h3 className="font-bold text-lg">{proctor.proctorName}</h3>
- <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
- <Briefcase className="w-3 h-3" />
- {proctor.proctorDesignation || "Proctor"}
- </p>
- </div>
- <div className="space-y-3 pt-4 border-t border-gray-800">
- {proctor.proctorEmail && (
- <div className="flex items-center gap-3 text-sm">
- <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Mail className="w-4 h-4" /></div>
- <a href={`mailto:${proctor.proctorEmail}`} className="hover:text-purple-500 transition-colors">{proctor.proctorEmail}</a>
- </div>
- )}
- {proctor.proctorMobile && (
- <div className="flex items-center gap-3 text-sm">
- <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Phone className="w-4 h-4" /></div>
- <a href={`tel:${proctor.proctorMobile}`} className="hover:text-purple-500 transition-colors">{proctor.proctorMobile}</a>
- </div>
- )}
- </div>
- </>
- ) : (
- <div className="text-center py-6 text-gray-500">
- <p>Proctor information not found.</p>
- <p className="text-xs mt-2">Log in again to refresh your profile data.</p>
- </div>
- )}
+  {isProctorLoading ? (
+  <div className="flex justify-center items-center py-8">
+  <div className="w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+  ) : proctorError ? (
+  <div className="text-center py-6 text-red-400">
+  <p>{proctorError}</p>
+  <button onClick={() => window.location.reload()} className="mt-4 px-4 py-2 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 rounded-md transition-colors text-sm">
+  Retry
+  </button>
+  </div>
+  ) : proctor?.proctorName ? (
+  <>
+  <div>
+  <h3 className="font-bold text-lg">{proctor.proctorName}</h3>
+  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+  <Briefcase className="w-3 h-3" />
+  {proctor.proctorDesignation || "Proctor"}
+  </p>
+  </div>
+  <div className="space-y-3 pt-4 border-t border-gray-800">
+  {proctor.proctorEmail && (
+  <div className="flex items-center gap-3 text-sm">
+  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Mail className="w-4 h-4" /></div>
+  <a href={`mailto:${proctor.proctorEmail}`} className="hover:text-purple-500 transition-colors">{proctor.proctorEmail}</a>
+  </div>
+  )}
+  {proctor.proctorMobile && (
+  <div className="flex items-center gap-3 text-sm">
+  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Phone className="w-4 h-4" /></div>
+  <a href={`tel:${proctor.proctorMobile}`} className="hover:text-purple-500 transition-colors">{proctor.proctorMobile}</a>
+  </div>
+  )}
+  {proctor.cabin && (
+  <div className="flex items-center gap-3 text-sm">
+  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><MapPin className="w-4 h-4" /></div>
+  <span className="text-gray-300">{proctor.cabin}</span>
+  </div>
+  )}
+  {proctor.school && (
+  <div className="flex items-center gap-3 text-sm">
+  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><GraduationCap className="w-4 h-4" /></div>
+  <span className="text-gray-300">{proctor.school}</span>
+  </div>
+  )}
+  </div>
+  </>
+  ) : (
+  <div className="text-center py-6 text-gray-500">
+  <p>Proctor information not found.</p>
+  <p className="text-xs mt-2">Log in again to refresh your profile data.</p>
+  </div>
+  )}
  </CardContent>
  </Card>
  </div>

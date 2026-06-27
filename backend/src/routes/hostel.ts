@@ -119,19 +119,6 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
             }
         );
 
-        if (process.env.DEBUG_PROCTOR === "true") {
-            console.log("\n[DEBUG_PROCTOR] Endpoint: /vtop/studentsRecord/StudentProfileAllView");
-            console.log("[DEBUG_PROCTOR] Status Code:", hostelRes.status);
-            console.log("[DEBUG_PROCTOR] Final URL after redirects:", hostelRes.request?.res?.responseUrl || "N/A");
-            const isAuthError = hostelRes.data.includes("You are logged out") || hostelRes.data.includes("Not Authorized");
-            console.log("[DEBUG_PROCTOR] Auth Succeeded?", !isAuthError);
-
-            const scratchDir = path.join(process.cwd(), "..", "scratch");
-            if (!fs.existsSync(scratchDir)) fs.mkdirSync(scratchDir, { recursive: true });
-            fs.writeFileSync(path.join(scratchDir, "vtop_profile_debug.html"), hostelRes.data);
-            console.log("[DEBUG_PROCTOR] Raw HTML saved to scratch/vtop_profile_debug.html\n");
-        }
-
         await client.post(
             "/vtop/hostels/student/leave/1",
             new URLSearchParams({
@@ -212,27 +199,13 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
                 hostelInfo.blockName = value.split(" ")[0] || "NOT ALLOTED";
             } else if (label.includes("Room No")) {
                 hostelInfo.roomNo = value;
-            } else if (label.includes("Mess Information")) {
+            if (label.includes("Mess Information")) {
                 hostelInfo.messInfo = value.split(" ")[0] || "NOT ALLOTED";
                 if (hostelInfo.messInfo.length > 7) {
                     if (hostelInfo.messInfo === "NON") hostelInfo.messInfo = "NON VEG";
                     else if (hostelInfo.messInfo === "FOOD") hostelInfo.messInfo = "FOOD PARK";
                     else hostelInfo.messInfo = "NOT ALLOTED";
                 }
-            }
-
-            const labelLower = label.toLowerCase();
-            if (labelLower.includes("proctor") && labelLower.includes("name")) {
-                hostelInfo.proctorName = value;
-            } else if (labelLower.includes("proctor") && labelLower.includes("email")) {
-                hostelInfo.proctorEmail = value;
-            } else if (labelLower.includes("proctor") && labelLower.includes("mobile")) {
-                hostelInfo.proctorMobile = value;
-            } else if (labelLower.includes("proctor") && labelLower.includes("designation")) {
-                hostelInfo.proctorDesignation = value;
-            } else if (labelLower.includes("faculty advisor") && labelLower.includes("name")) {
-                // Sometimes it's called Faculty Advisor
-                if (!hostelInfo.proctorName) hostelInfo.proctorName = value;
             }
         });
 

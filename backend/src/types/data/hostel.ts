@@ -4,10 +4,6 @@ export type hostel = {
     blockName?: string,
     roomNo?: string,
     messInfo?: string,
-    proctorName?: string,
-    proctorEmail?: string,
-    proctorMobile?: string,
-    proctorDesignation?: string,
 }
 
 export type leaveItem = {
