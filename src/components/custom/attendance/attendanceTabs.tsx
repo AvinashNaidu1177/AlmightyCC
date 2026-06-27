@@ -142,9 +142,10 @@ export default function AttendanceTabs({ data, activeDay, setActiveDay, calendar
  if (!ev) return null;
  return ev.formattedDate;
  };
+ const currentYear = new Date().getFullYear();
  const impDates = {
- cat1Date: findEventDate("CAT I"),
- cat2Date: findEventDate("CAT II"),
+ cat1Date: findEventDate("CAT I") || new Date(currentYear, 7, 8),
+ cat2Date: findEventDate("CAT II") || new Date(currentYear, 8, 25),
  lidLabDate: findEventDate("lid for laboratory classes"),
  lidTheoryDate: findEventDate("LID FOR THEORY CLASSES"),
  midsemStart: findEventDate("Mid Term Test"),
