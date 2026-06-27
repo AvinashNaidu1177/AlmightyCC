@@ -44,63 +44,24 @@ type FacultyCourseInfo = {
 
  useEffect(() => {
  try {
-  const fetchProctor = async () => {
-   setIsProctorLoading(true);
-   setProctorError(null);
-   try {
-     const idsRaw = localStorage.getItem("IDs");
-     if (!idsRaw) {
-         setProctorError("No credentials found. Please log in again.");
-         setIsProctorLoading(false);
-         return;
-     }
-     const ids = JSON.parse(idsRaw);
-     
-     // 1. Get fresh VTOP session
-     const loginResponse = await fetch(`${API_BASE}/api/login`, {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ username: ids.VtopUsername, password: ids.VtopPassword }),
-     });
-     const loginData = await loginResponse.json();
-     
-     if (!loginData.success) {
-         setProctorError(loginData.message || "Failed to authenticate with VTOP.");
-         setIsProctorLoading(false);
-         return;
-     }
-
-     // 2. Fetch proctor info using fresh session
-     const response = await fetch(`${API_BASE}/api/proctor`, {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ 
-           authorizedID: loginData.authorizedID, 
-           cookies: loginData.cookies, 
-           csrf: loginData.csrf 
-       }),
-     });
-     
-     if (!response.ok) {
-         setProctorError(`Backend Error: HTTP ${response.status} (Make sure the backend is updated and deployed)`);
-         setIsProctorLoading(false);
-         return;
-     }
-
-     const data = await response.json();
-     if (data.success && data.proctorInfo) {
-       setProctor(data.proctorInfo);
-     } else {
-       setProctorError(data.message || "Failed to load proctor information");
-     }
-   } catch (err: any) {
-     setProctorError(`Failed to connect to the server. ${err.message}`);
-   } finally {
-     setIsProctorLoading(false);
-   }
-  };
-  
-  fetchProctor();
+   const loadProctor = () => {
+    setIsProctorLoading(true);
+    setProctorError(null);
+    try {
+      const storedProctor = localStorage.getItem("proctor");
+      if (storedProctor) {
+        setProctor(JSON.parse(storedProctor));
+      } else {
+        setProctorError("No proctor information found.");
+      }
+    } catch (err: any) {
+      setProctorError(`Failed to load proctor data. ${err.message}`);
+    } finally {
+      setIsProctorLoading(false);
+    }
+   };
+   
+   loadProctor();
 
  // Load Faculty from Attendance data
  const attRaw = localStorage.getItem("attendance");

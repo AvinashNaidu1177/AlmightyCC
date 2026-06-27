@@ -11,7 +11,7 @@ import { AllGradesRes } from "@/types/data/allgrades";
 import { loadActivityTree, saveActivityTree } from "@/lib/activit-tree";
 import demoData from '../../app/demoData.json';
 import { AnimatePresence, motion } from "framer-motion";
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.uni-cc.site";
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.amazecc.com";
 
 type settings = {
  decimalValues: boolean;
@@ -191,7 +191,7 @@ export default function LoginPage() {
  }),
  });
 
- const data = await loginRes.json();
+ if (!loginRes.ok) throw new Error("Backend Error"); const data = await loginRes.json();
 
  if (data.message?.includes("Invalid Captcha") && !retry) {
  console.warn("Invalid Captcha. Retrying once...");
@@ -225,14 +225,15 @@ export default function LoginPage() {
  ScheduleRes,
  HostelRes,
  calenderRes,
- allGradesRes
+ allGradesRes,
+ proctorRes
  ] = await Promise.all([
  fetch(`${API_BASE}/api/attendance`, {
  method: "POST",
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ cookies: cookies, authorizedID, csrf, semesterId: currSemesterID }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ Attendance/Marks fetched");
  setProgressBar(prev => prev + 10);
  return j;
@@ -243,7 +244,7 @@ export default function LoginPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ cookies: cookies, authorizedID, csrf, semesterId: currSemesterID }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ Grades fetched");
  setProgressBar(prev => prev + 5);
  return j;
@@ -254,7 +255,7 @@ export default function LoginPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ cookies: cookies, authorizedID, csrf, semesterId: currSemesterID }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ Exam schedule fetched");
  setProgressBar(prev => prev + 5);
  return j;
@@ -265,7 +266,7 @@ export default function LoginPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ cookies: cookies, authorizedID, csrf }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ Hostel details fetched");
  setProgressBar(prev => prev + 5);
  return j;
@@ -281,7 +282,7 @@ export default function LoginPage() {
  semesterId: currSemesterID
  }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ Calendar fetched");
  setProgressBar(prev => prev + 5);
  return j;
@@ -291,9 +292,19 @@ export default function LoginPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ cookies: cookies, authorizedID, csrf }),
  }).then(async r => {
- const j = await r.json();
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
  setMessage(prev => prev + "\n✅ All grades fetched");
  setProgressBar(prev => prev + 10);
+ return j;
+ }),
+ fetch(`${API_BASE}/api/proctor`, {
+ method: "POST",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify({ cookies: cookies, authorizedID, csrf }),
+ }).then(async r => {
+ if (!r.ok) return { success: false, message: "Backend error" }; const j = await r.json();
+ setMessage(prev => prev + "\n✅ Proctor details fetched");
+ setProgressBar(prev => prev + 5);
  return j;
  }),
  ]);
@@ -304,14 +315,17 @@ export default function LoginPage() {
  setMarksData(marksRes);
  setGradesData(gradesRes);
  setAllGradesData(allGradesRes);
+ if (proctorRes && proctorRes.proctorInfo) {
+ localStorage.setItem("proctor", JSON.stringify(proctorRes.proctorInfo));
+ }
+ localStorage.setItem("grades", JSON.stringify(gradesRes));
+ localStorage.setItem("allGrades", JSON.stringify(allGradesRes));
  setScheduleData(ScheduleRes);
  sethostelData(HostelRes);
  setCalender(calenderRes);
 
  localStorage.setItem("attendance", JSON.stringify(attRes));
  localStorage.setItem("marks", JSON.stringify(marksRes));
- localStorage.setItem("grades", JSON.stringify(gradesRes));
- localStorage.setItem("allGrades", JSON.stringify(allGradesRes));
  localStorage.setItem("schedule", JSON.stringify(ScheduleRes));
  localStorage.setItem("hostel", JSON.stringify(HostelRes));
  localStorage.setItem("calender", JSON.stringify(calenderRes));
