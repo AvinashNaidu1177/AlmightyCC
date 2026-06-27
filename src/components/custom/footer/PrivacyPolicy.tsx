@@ -94,7 +94,7 @@ export default function PrivacyPolicyPage({ handleClose }) {
  </p>
 
  <p className="text-xs text-gray-500 dark:text-gray-400 midnight:text-gray-400 mt-6">
- Last updated: 11 Nov, 2025
+ Last updated: 28 Jun, 2026
  </p>
  </div>
  </div>
