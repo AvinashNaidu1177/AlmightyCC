@@ -76,15 +76,15 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  );
  if (!allMonthsAreHolidays) {
  if (isLab) {
- classesTillCAT1 = countTillDate(impDates.cat1Date);
- classesTillCAT2 = countTillDate(impDates.cat2Date);
- classesTillMidSem = countTillDate(impDates.midsemStart);
- classesTillLID = countTillDate(impDates.lidLabDate);
+ classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
+ classesTillCAT2 = countTillDate(impDates.cat2Date) || [];
+ classesTillMidSem = countTillDate(impDates.midsemStart) || [];
+ classesTillLID = countTillDate(impDates.lidLabDate) || [];
  } else if (isTheory) {
- classesTillCAT1 = countTillDate(impDates.cat1Date);
- classesTillCAT2 = countTillDate(impDates.cat2Date);
- classesTillMidSem = countTillDate(impDates.midsemStart);
- classesTillLID = countTillDate(impDates.lidTheoryDate);
+ classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
+ classesTillCAT2 = countTillDate(impDates.cat2Date) || [];
+ classesTillMidSem = countTillDate(impDates.midsemStart) || [];
+ classesTillLID = countTillDate(impDates.lidTheoryDate) || [];
  }
  }
  }
@@ -231,9 +231,9 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
 
  <div
  className={`transition-all duration-300 ease-in-out ${openDropdown === key ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
- } overflow-hidden`}
+ } flex flex-col`}
  >
- <div className="px-3 pb-2 bg-black/40 rounded-b-lg border-t border-purple-500/10 mt-1 pt-2">
+ <div className="px-3 pb-2 bg-black/40 rounded-b-lg border-t border-purple-500/10 mt-1 pt-2 overflow-y-auto max-h-[380px] custom-scrollbar">
  <UpcomingClassesList
  classes={data}
  attendedClasses={a.attendedClasses}
