@@ -39,17 +39,16 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
         
         let proctorEndpoint = "";
         
-        // VTOP menus usually use ajaxcall or loadProcess in onclick or href
         // We look for any element containing "View Proctor Details"
-        $dashboard("*").each((i, el) => {
-            const text = $dashboard(el).text().trim();
-            if (text.includes("View Proctor Details")) {
-                const html = $dashboard(el).parent().html() || "";
-                const onclick = $dashboard(el).attr("onclick") || $dashboard(el).parent().attr("onclick") || "";
-                const href = $dashboard(el).attr("href") || $dashboard(el).parent().attr("href") || "";
+        $dashboard("a, button, li, span, div").each((i, el) => {
+            const text = $dashboard(el).text().trim().toLowerCase();
+            if (text.includes("proctor details") || text.includes("view proctor")) {
+                const parent = $dashboard(el).parent();
+                const onclick = $dashboard(el).attr("onclick") || parent.attr("onclick") || "";
+                const href = $dashboard(el).attr("href") || parent.attr("href") || "";
                 
-                // Typical VTOP structure: loadProcess('/vtop/proctor/viewProctorDetails', ...) or similar
-                const match = (onclick + href + html).match(/['"](\/vtop\/[^'"]+Proctor[^'"]+)['"]/i);
+                // Typical VTOP structure: loadProcess('/vtop/something', ...) or href='/vtop/something'
+                const match = (onclick + href).match(/['"](\/vtop\/[^'"]+)['"]/i);
                 if (match) {
                     proctorEndpoint = match[1];
                 }
@@ -121,9 +120,10 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
         });
 
         if (!proctorName && !email && !mobile) {
+            // Give detailed debug output in the message so the frontend can display it
             return res.status(200).json({
                 success: false,
-                message: "No proctor information found.",
+                message: `No proctor information found. (Debug Endpoint: ${proctorEndpoint || 'N/A'}, Page HTML Length: ${html.length})`,
                 debugEndpointUsed: proctorEndpoint
             });
         }
