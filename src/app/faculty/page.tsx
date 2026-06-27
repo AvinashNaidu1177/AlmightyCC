@@ -119,11 +119,28 @@ type FacultyCourseInfo = {
  {/* Proctor Section */}
  <div className="md:col-span-1 space-y-6">
  <Card className="dark:bg-[#0a0a0f] border-purple-200 dark:border-purple-900/50 shadow-md shadow-purple-500/10">
- <CardHeader className="bg-purple-50 dark:bg-purple-900/10 border-b border-purple-100 dark:border-purple-900/30">
- <CardTitle className="text-purple-400 text-lg flex items-center gap-2">
- <User className="w-5 h-5" />
+ <CardHeader className="bg-purple-50 dark:bg-purple-900/10 border-b border-purple-100 dark:border-purple-900/30 pb-5">
+ <div className="flex flex-col justify-center min-h-[100px]">
+ <CardTitle className="text-purple-400 text-sm font-medium flex items-center gap-2 uppercase tracking-wider mb-3">
+ <User className="w-4 h-4" />
  My Proctor
  </CardTitle>
+ {(!isProctorLoading && !proctorError && proctor?.name) && (
+ <div className="flex flex-col justify-center">
+ <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 line-clamp-1">{proctor.name}</h3>
+ <p className="text-sm text-purple-700 dark:text-purple-400 font-medium flex items-center gap-1.5 mt-1 line-clamp-1">
+ <Briefcase className="w-3.5 h-3.5 shrink-0" />
+ <span className="truncate">{proctor.designation || "Proctor"}</span>
+ </p>
+ {proctor.facultyId && (
+ <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5 mt-1">
+ <User className="w-3.5 h-3.5 shrink-0" />
+ {proctor.facultyId}
+ </p>
+ )}
+ </div>
+ )}
+ </div>
  </CardHeader>
  <CardContent className="pt-6 space-y-4">
   {isProctorLoading ? (
@@ -138,21 +155,7 @@ type FacultyCourseInfo = {
   </button>
   </div>
   ) : proctor?.name ? (
-  <>
-  <div>
-  <h3 className="font-bold text-lg">{proctor.name}</h3>
-  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-  <Briefcase className="w-3 h-3" />
-  {proctor.designation || "Proctor"}
-  </p>
-  {proctor.facultyId && (
-  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-  <User className="w-3 h-3" />
-  {proctor.facultyId}
-  </p>
-  )}
-  </div>
-  <div className="space-y-3 pt-4 border-t border-gray-800">
+  <div className="space-y-4 pt-2">
   {proctor.email && (
   <div className="flex items-center gap-3 text-sm">
   <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Mail className="w-4 h-4" /></div>
@@ -178,7 +181,6 @@ type FacultyCourseInfo = {
   </div>
   )}
   </div>
-  </>
   ) : (
   <div className="text-center py-6 text-gray-500">
   <p>Proctor information not found.</p>
