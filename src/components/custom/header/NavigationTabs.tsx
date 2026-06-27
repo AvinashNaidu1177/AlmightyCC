@@ -27,13 +27,13 @@ export default function NavigationTabs({
  setTimeout(() => setIsSpinning(false), 600);
  };
 
- const tabBase = "flex-1 py-3 text-sm font-medium transition-colors";
- const tabActive = "bg-purple-600 text-white dark:bg-purple-500 dark:text-gray-100 midnight:bg-purple-700 ";
- const tabInactive =
- "bg-[#111111] text-gray-400 hover:bg-gray-800 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700 midnight:hover:bg-gray-800";
+  const tabBase = "flex-1 py-3 text-sm font-medium transition-all duration-300 ease-out border-b-2";
+  const tabActive = "bg-purple-900/10 text-white dark:bg-purple-500/10 dark:text-gray-100 border-purple-500 shadow-[inset_0_-2px_10px_-2px_rgba(168,85,247,0.3)]";
+  const tabInactive =
+  "bg-transparent text-gray-500 hover:text-gray-300 dark:text-gray-400 dark:hover:text-gray-200 border-transparent hover:bg-white/[0.02] dark:hover:bg-white/[0.02]";
 
- return (
- <div data-scrollable className="flex w-full shadow-sm pb-4 dark:bg-slate-900 ">
+  return (
+  <div data-scrollable className="flex w-full border-b border-white/5 pb-0 bg-[#09090b] pt-2 px-2 gap-2">
  {showSettingsPage && (
  <SettingsPage
  handleClose={() => setShowSettingsPage(false)}
@@ -59,12 +59,12 @@ export default function NavigationTabs({
  }
  />
  )}
- <button
- onClick={() => setShowSettingsPage(true)}
- className="w-12 flex items-center justify-center bg-gray-400 hover:cursor-pointer text-white text-sm font-medium hover:bg-gray-500 dark:bg-gray-500 dark:hover:bg-gray-600 midnight:bg-gray-600 midnight:hover:bg-gray-700 transition-colors"
- >
- <Settings className="w-5 h-5" />
- </button>
+  <button
+  onClick={() => setShowSettingsPage(true)}
+  className="w-12 mb-2 flex items-center justify-center bg-transparent border border-white/5 rounded-lg hover:cursor-pointer text-gray-400 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] transition-all duration-300"
+  >
+  <Settings className="w-5 h-5" />
+  </button>
 
  <button
  onClick={() => setActiveTab("attendance")}
@@ -90,13 +90,13 @@ export default function NavigationTabs({
  Hostel
  </button>
 
- <button
- onClick={handleReloadClick}
- className="w-12 flex items-center justify-center bg-purple-500 hover:cursor-pointer text-white text-sm font-medium hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 midnight:bg-purple-800 transition-colors"
- >
- <RefreshCcw className={`w-4 h-4 ${isSpinning ? "animate-spin" : ""}`} />
- </button>
+  <button
+  onClick={handleReloadClick}
+  className="w-12 mb-2 flex items-center justify-center bg-transparent border border-white/5 rounded-lg hover:cursor-pointer text-gray-400 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] transition-all duration-300 ml-2"
+  >
+  <RefreshCcw className={`w-4 h-4 ${isSpinning ? "animate-spin" : ""}`} />
+  </button>
 
- </div>
+  </div>
  );
 }

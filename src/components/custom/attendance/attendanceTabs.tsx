@@ -153,32 +153,32 @@ export default function AttendanceTabs({ data, activeDay, setActiveDay, calendar
  if (daysWithClasses.length === 0) return <NoContentFound />;
 
  return (
- <div className="grid gap-4">
- <h1 className="text-xl font-bold mb-4 text-center text-gray-100 ">
- <button onClick={() => setShowTimetable(true)} className="mt-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors">
- <Calendar className={`w-4 h-4`} />
- </button>
- {" "} Weekly Attendance {" "}
- <button onClick={() => setShowPredictor(true)} className="mt-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors">
- <BadgeQuestionMark className={`w-4 h-4`} />
- </button>
- </h1>
+  <div className="grid gap-4">
+  <div className="flex justify-center items-center gap-3 mb-2 mt-4">
+  <button onClick={() => setShowTimetable(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#09090b] border border-purple-500/30 text-white text-[13px] font-semibold hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
+  <Calendar className="w-4 h-4 text-purple-400" />
+  Weekly Attendance
+  </button>
+  <button onClick={() => setShowPredictor(true)} className="flex items-center justify-center p-2.5 rounded-xl bg-[#09090b] border border-purple-500/30 text-purple-400 hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300">
+  <BadgeQuestionMark className="w-4 h-4" />
+  </button>
+  </div>
 
- <div className="flex gap-2 mb-3 justify-center flex-wrap">
- {daysWithClasses.map((d) => (
- <button
- key={d}
- onClick={() => setActiveDay(d)}
- className={`px-4 py-2 rounded-md text-sm md:text-base font-medium transition-colors duration-150
- ${activeDay === d
- ? "bg-purple-600 text-white midnight:bg-purple-700"
- : "bg-[#111111] text-gray-400 hover:bg-purple-900/60 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 midnight:hover:bg-gray-800 "
- }`}
- >
- {d}
- </button>
- ))}
- </div>
+  <div className="flex gap-2 mb-4 justify-center flex-wrap">
+  {daysWithClasses.map((d) => (
+  <button
+  key={d}
+  onClick={() => setActiveDay(d)}
+  className={`px-5 py-2 rounded-xl text-[12px] md:text-[13px] font-semibold transition-all duration-300
+  ${activeDay === d
+  ? "bg-purple-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-purple-500"
+  : "bg-transparent text-gray-400 border border-white/5 hover:border-purple-500/30 hover:text-purple-400 hover:bg-purple-500/5"
+  }`}
+  >
+  {d}
+  </button>
+  ))}
+  </div>
 
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-2">
  {dayCardsMap[activeDay]?.map((a, idx) => (

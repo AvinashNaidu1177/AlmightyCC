@@ -41,43 +41,44 @@ export default function CourseCard({ a, onClick, activeDay, isHoliday, decimalVa
  }, [a.time, activeDay]);
 
  return (
- <Card
- onClick={onClick}
- className={`p-4 rounded-lg shadow-sm transition-shadow duration-300 cursor-pointer h-full flex flex-col justify-between
- ${(ongoing && !isHoliday)
- ? "ring-2 ring-yellow-200 shadow-lg bg-yellow-50 dark:bg-yellow-900/40 midnight:bg-yellow-900/40"
- : "hover:shadow-md dark:hover:shadow-lg midnight:hover:shadow-lg"
- }`}
- >
- <div className="flex justify-between items-center">
- <div className="flex flex-col gap-2 flex-grow">
- <CardHeader className="p-0">
- <CardTitle className="text-lg font-semibold text-gray-300 dark:text-gray-100 ">
- {a.courseTitle}
- </CardTitle>
- <p className="text-sm text-gray-500 dark:text-gray-400 midnight:text-gray-400">
- {a.slotName}
- </p>
- </CardHeader>
+  <Card
+  onClick={onClick}
+  className={`relative overflow-hidden p-5 rounded-2xl cursor-pointer h-full flex flex-col justify-between transition-all duration-300 ease-out
+  ${(ongoing && !isHoliday)
+  ? "bg-[#09090b] border border-yellow-500/40 shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(234,179,8,0.25)] hover:border-yellow-400/60"
+  : "bg-[#09090b] border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:border-purple-500/50"
+  }`}
+  >
+  <div className="absolute top-0 left-0 w-[200px] h-[200px] bg-purple-500/10 blur-[50px] pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+  <div className="flex justify-between items-center relative z-10">
+  <div className="flex flex-col gap-2 flex-grow">
+  <CardHeader className="p-0">
+  <CardTitle className="text-[15px] font-semibold text-white tracking-wide">
+  {a.courseTitle}
+  </CardTitle>
+  <p className="text-[13px] text-gray-400 mt-1">
+  {a.slotName}
+  </p>
+  </CardHeader>
 
- <CardContent className="p-0 text-sm text-gray-600 dark:text-gray-300 space-y-1">
- <div className="flex items-center gap-2">
- <Building2 size={16} className="text-gray-500 dark:text-gray-400 midnight:text-gray-400" />
- <span>{a.slotVenue}</span>
- </div>
- <div className="flex items-center gap-2">
- <Clock size={16} className="text-gray-500 dark:text-gray-400 midnight:text-gray-400" />
- <span>{a.time}</span>
- </div>
- <p>
- <strong>Faculty:</strong> {a.faculty}
- </p>
- <p>
- <strong>Classes Attended:</strong>{" "}
- <span className="font-semibold">
- {a.attendedClasses}/{a.totalClasses}
- </span>
- </p>
+  <CardContent className="p-0 text-[13px] text-gray-400 space-y-2 mt-2">
+  <div className="flex items-center gap-2">
+  <Building2 size={14} className="text-purple-400" />
+  <span>{a.slotVenue}</span>
+  </div>
+  <div className="flex items-center gap-2">
+  <Clock size={14} className="text-purple-400" />
+  <span>{a.time}</span>
+  </div>
+  <p>
+  Faculty: <span className="text-gray-300">{a.faculty}</span>
+  </p>
+  <p>
+  Classes Attended:{" "}
+  <span className="text-gray-300">
+  {a.attendedClasses}/{a.totalClasses}
+  </span>
+  </p>
  </CardContent>
  {a.totalClasses > 0 && (() => {
  const attended = a.attendedClasses;
@@ -114,30 +115,31 @@ export default function CourseCard({ a, onClick, activeDay, isHoliday, decimalVa
  }
  }
  })()}
- </div>
+  </div>
 
- <div className="w-28 h-28 flex-shrink-0 flex flex-col items-center justify-center ml-4">
- <CircularProgressbar
- value={a.attendancePercentage}
- text={`${!decimalValues ? a.attendancePercentage : (a.attendedClasses/a.totalClasses * 100).toFixed(1)}%`}
- styles={buildStyles({
- pathColor:
- a.attendancePercentage < 75
- ? "#EF4444"
- : a.attendancePercentage < 85
- ? "#FACC15"
- : "#A855F7",
- textColor: "currentColor",
- trailColor: "#CBD5E1",
- strokeLinecap: "round",
- pathTransitionDuration: 0.5,
- })}
- />
- <p className="text-center text-xs font-semibold mt-2 text-gray-400 dark:text-gray-300 ">
- Attendance
- </p>
- </div>
- </div>
- </Card>
+  <div className="w-[100px] h-[100px] flex-shrink-0 flex flex-col items-center justify-center ml-4 relative z-10">
+  <CircularProgressbar
+  value={a.attendancePercentage}
+  text={`${!decimalValues ? a.attendancePercentage : (a.attendedClasses/a.totalClasses * 100).toFixed(1)}%`}
+  styles={buildStyles({
+  pathColor:
+  a.attendancePercentage < 75
+  ? "#EF4444"
+  : a.attendancePercentage < 85
+  ? "#FACC15"
+  : "#A855F7",
+  textColor: "#ffffff",
+  trailColor: "rgba(255,255,255,0.08)",
+  strokeLinecap: "round",
+  pathTransitionDuration: 0.5,
+  textSize: "24px"
+  })}
+  />
+  <p className="text-center text-[11px] font-medium mt-3 text-gray-400 tracking-wide uppercase">
+  Attendance
+  </p>
+  </div>
+  </div>
+  </Card>
  );
 }
