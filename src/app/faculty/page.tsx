@@ -119,9 +119,9 @@ type FacultyCourseInfo = {
  {/* Proctor Section */}
  <div className="md:col-span-1 space-y-6">
  <Card className="dark:bg-[#0a0a0f] border-purple-200 dark:border-purple-900/50 shadow-md shadow-purple-500/10">
- <CardHeader className="bg-purple-50 dark:bg-purple-900/10 border-b border-purple-100 dark:border-purple-900/30 pb-5">
- <div className="flex flex-col justify-center min-h-[100px]">
- <CardTitle className="text-purple-400 text-sm font-medium flex items-center gap-2 uppercase tracking-wider mb-3">
+ <CardHeader className="bg-purple-50 dark:bg-purple-900/10 border-b border-purple-100 dark:border-purple-900/30 p-5 pb-4">
+ <div className="flex flex-col justify-center">
+ <CardTitle className="text-purple-400 text-sm font-medium flex items-center gap-2 uppercase tracking-wider mb-3 mt-1">
  <User className="w-4 h-4" />
  My Proctor
  </CardTitle>
@@ -142,7 +142,7 @@ type FacultyCourseInfo = {
  )}
  </div>
  </CardHeader>
- <CardContent className="pt-6 space-y-4">
+ <CardContent className="p-5 pt-4">
   {isProctorLoading ? (
   <div className="flex justify-center items-center py-8">
   <div className="w-6 h-6 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
@@ -155,7 +155,7 @@ type FacultyCourseInfo = {
   </button>
   </div>
   ) : proctor?.name ? (
-  <div className="space-y-4 pt-2">
+  <div className="space-y-3.5">
   {proctor.email && (
   <div className="flex items-center gap-3 text-sm">
   <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Mail className="w-4 h-4" /></div>
