@@ -4,6 +4,8 @@ import VTOPClient from "../lib/clients/VTOPClient";
 import { RequestBody } from "../types/custom";
 import { hostel, leaveItem } from "../types/data/hostel";
 import * as cheerio from "cheerio";
+import fs from "fs";
+import path from "path";
 import { URLSearchParams } from "url";
 import type { Router } from "express";
 
@@ -116,6 +118,19 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
                 },
             }
         );
+
+        if (process.env.DEBUG_PROCTOR === "true") {
+            console.log("\n[DEBUG_PROCTOR] Endpoint: /vtop/studentsRecord/StudentProfileAllView");
+            console.log("[DEBUG_PROCTOR] Status Code:", hostelRes.status);
+            console.log("[DEBUG_PROCTOR] Final URL after redirects:", hostelRes.request?.res?.responseUrl || "N/A");
+            const isAuthError = hostelRes.data.includes("You are logged out") || hostelRes.data.includes("Not Authorized");
+            console.log("[DEBUG_PROCTOR] Auth Succeeded?", !isAuthError);
+
+            const scratchDir = path.join(process.cwd(), "..", "scratch");
+            if (!fs.existsSync(scratchDir)) fs.mkdirSync(scratchDir, { recursive: true });
+            fs.writeFileSync(path.join(scratchDir, "vtop_profile_debug.html"), hostelRes.data);
+            console.log("[DEBUG_PROCTOR] Raw HTML saved to scratch/vtop_profile_debug.html\n");
+        }
 
         await client.post(
             "/vtop/hostels/student/leave/1",
