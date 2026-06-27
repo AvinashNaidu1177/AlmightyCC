@@ -81,14 +81,20 @@ type FacultyCourseInfo = {
        }),
      });
      
+     if (!response.ok) {
+         setProctorError(`Backend Error: HTTP ${response.status} (Make sure the backend is updated and deployed)`);
+         setIsProctorLoading(false);
+         return;
+     }
+
      const data = await response.json();
      if (data.success && data.proctorInfo) {
        setProctor(data.proctorInfo);
      } else {
        setProctorError(data.message || "Failed to load proctor information");
      }
-   } catch (err) {
-     setProctorError("Failed to connect to the server.");
+   } catch (err: any) {
+     setProctorError(`Failed to connect to the server. ${err.message}`);
    } finally {
      setIsProctorLoading(false);
    }
