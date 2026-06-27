@@ -94,14 +94,14 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
 
  return (
  <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
- <div className="bg-gray-900 dark:bg-gray-800 rounded-2xl shadow-2xl p-5 w-[90%] max-w-md relative max-h-[90vh] overflow-hidden flex flex-col overflow-y-auto">
+ <div className="bg-gradient-to-br from-[#1c0f30]/95 to-black border border-purple-500/30 rounded-2xl shadow-[0_0_40px_rgba(168,85,247,0.2)] p-5 w-[90%] max-w-md relative max-h-[90vh] overflow-hidden flex flex-col overflow-y-auto backdrop-blur-xl">
  <Button
  variant="ghost"
  size="icon"
  onClick={() => setExpandedIdx(null)}
- className="top-2 right-2 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-slate-800 midnight:hover:bg-gray-900"
+ className="top-3 right-3 absolute cursor-pointer hover:bg-transparent"
  >
- <X size={22} className="text-gray-600 dark:text-gray-300 " />
+ <X size={22} className="text-gray-500 transition-all duration-300 hover:text-white hover:scale-110" />
  </Button>
 
  <div
@@ -205,15 +205,15 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  classesTillCAT2,
  classesTillMidSem,
  classesTillLID,
- ].some((data) => Array.isArray(data) && data.length > 0) ? (
- <div className="text-sm space-y-3 mt-3 border-t border-b border-gray-700 py-2">
+ ].some((data) => Array.isArray(data)) ? (
+ <div className="text-sm space-y-3 mt-3 border-t border-b border-gray-700/50 py-2">
  {[
  { key: "CAT1", label: "Classes left before CAT I", data: classesTillCAT1 },
  { key: "CAT2", label: "Classes left before CAT II", data: classesTillCAT2 },
  { key: "MIDSEM", label: "Classes left before Mid Term Test", data: classesTillMidSem },
  { key: "LID", label: "Classes left before FAT", data: classesTillLID },
  ].map(({ key, label, data }) => (
- Array.isArray(data) && data.length > 0 ? (
+ Array.isArray(data) ? (
  <div
  key={key}
  className="w-full rounded-lg overflow-hidden transition-all duration-200"
@@ -221,19 +221,19 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  <button
  onClick={() => toggleDropdown(key)}
  className="flex items-center justify-between w-full px-3 py-2 text-left 
- font-medium text-gray-300 dark:text-gray-200 
- hover:bg-[#111111] dark:hover:bg-slate-700 midnight:hover:bg-gray-900 
+ font-medium text-gray-300 hover:text-white
+ hover:bg-white/5 rounded-lg
  transition-colors"
  >
  <span>{label}: <strong>{data.length}</strong></span>
- {openDropdown === key ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+ {openDropdown === key ? <ChevronUp size={18} className="text-purple-400" /> : <ChevronDown size={18} className="text-gray-500" />}
  </button>
 
  <div
  className={`transition-all duration-300 ease-in-out ${openDropdown === key ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
  } overflow-hidden`}
  >
- <div className="px-3 pb-2 bg-slate-800 rounded-b-lg">
+ <div className="px-3 pb-2 bg-black/40 rounded-b-lg border-t border-purple-500/10 mt-1 pt-2">
  <UpcomingClassesList
  classes={data}
  attendedClasses={a.attendedClasses}
