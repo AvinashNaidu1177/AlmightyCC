@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     template: `%s - ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
-  manifest: "/manifest.json",
+  manifest: "/AlmightyCC/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico'
+    icon: '/AlmightyCC/favicon.ico',
+    shortcut: '/AlmightyCC/favicon.ico',
+    apple: '/AlmightyCC/favicon.ico'
   },
 };
 

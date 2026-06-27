@@ -10,6 +10,9 @@ const withSerwist = withSerwistInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  basePath: "/AlmightyCC",
+  assetPrefix: "/AlmightyCC",
+  trailingSlash: true,
   reactStrictMode: true,
   devIndicators: false,
   images: {

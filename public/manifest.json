@@ -1,13 +1,13 @@
 {
     "name": "AlmightyCC",
     "short_name": "AlmightyCC",
-    "start_url": "/",
+    "start_url": "/AlmightyCC/",
     "display": "standalone",
     "background_color": "#0a0a0f",
     "theme_color": "#792CA2",
     "icons": [
         {
-            "src": "/logo.png",
+            "src": "/AlmightyCC/logo.png",
             "sizes": "512x512",
             "type": "image/png"
         }
