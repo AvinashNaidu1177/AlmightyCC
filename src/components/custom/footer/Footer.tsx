@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Github, Settings, Link, Database } from "lucide-react";
+import NextLink from "next/link";
 import { IconToggle } from "../toggle";
 import { Button } from "../../ui/button";
 import DataPage from "./DataPage";
@@ -97,18 +98,18 @@ export default function Footer({ isLoggedIn }: FooterProps) {
  <div>
  {isLoggedIn && (
    <>
-    <a
+    <NextLink
     href="/ffcs"
     className="mt-2 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
     >
     FFCS Planner
-    </a> • 
-    <a
+    </NextLink> • 
+    <NextLink
     href="/faculty"
     className="mt-2 mx-1 w-18 h-6 hover:underline text-xs text-purple-600 dark:text-purple-400 font-bold"
     >
     Faculty Info
-    </a> • 
+    </NextLink> • 
    </>
  )}
  <Button

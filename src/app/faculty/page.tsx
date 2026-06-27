@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { User, Mail, Phone, MapPin, Briefcase, Users, GraduationCap } from "lucide-react";
 import { API_BASE } from "@/components/custom/Main";
@@ -108,7 +109,7 @@ type FacultyCourseInfo = {
  <div className="max-w-7xl mx-auto w-full space-y-8">
  
  <div className="flex items-center gap-4 border-b border-gray-800 pb-4">
- <a href="/" className="px-4 py-2 hover:bg-[#111111] dark:hover:bg-gray-800 rounded-md transition-colors text-sm font-medium">← Back</a>
+ <Link href="/" className="px-4 py-2 hover:bg-[#111111] dark:hover:bg-gray-800 rounded-md transition-colors text-sm font-medium">← Back</Link>
  <div>
  <h1 className="text-2xl font-bold text-purple-400">Faculty & Proctor Info</h1>
  <p className="text-sm text-gray-500">Contact information for your academic advisors</p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -126,7 +127,7 @@ export default function FFCSPage() {
                 <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-800 dark:border-gray-800 pb-4">
                     <div className="flex items-center gap-4">
                         <Button variant="ghost" asChild>
-                            <a href="/">← Back</a>
+                            <Link href="/">← Back</Link>
                         </Button>
                         <div>
                             <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">FFCS Timetable Builder</h1>
