@@ -11,8 +11,7 @@ import { AllGradesRes } from "@/types/data/allgrades";
 import { loadActivityTree, saveActivityTree } from "@/lib/activit-tree";
 import demoData from '../../app/demoData.json';
 import { AnimatePresence, motion } from "framer-motion";
-
-export const API_BASE = "https://api.uni-cc.site";
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://api.uni-cc.site";
 
 type settings = {
  decimalValues: boolean;
