@@ -146,7 +146,7 @@ export default function AttendanceTabs({ data, activeDay, setActiveDay, calendar
  const impDates = {
  cat1Date: findEventDate("CAT I") || new Date(currentYear, 7, 8),
  cat2Date: findEventDate("CAT II") || new Date(currentYear, 8, 25),
- lidLabDate: findEventDate("lid for laboratory classes"),
+ lidLabDate: findEventDate("lid for laboratory classes") || new Date(currentYear, 9, 24),
  lidTheoryDate: findEventDate("LID FOR THEORY CLASSES"),
  midsemStart: findEventDate("Mid Term Test"),
  };

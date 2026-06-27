@@ -75,8 +75,8 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  );
  if (!allMonthsAreHolidays) {
  if (isLab) {
- classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
- classesTillCAT2 = countTillDate(impDates.cat2Date) || [];
+ classesTillCAT1 = null;
+ classesTillCAT2 = null;
  classesTillLID = countTillDate(impDates.lidLabDate) || [];
  } else if (isTheory) {
  classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
