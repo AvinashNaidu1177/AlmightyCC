@@ -52,9 +52,12 @@ type FacultyCourseInfo = {
     try {
       const storedProctor = localStorage.getItem("proctor");
       if (storedProctor && storedProctor !== "undefined") {
-        setProctor(JSON.parse(storedProctor));
+        const parsed = JSON.parse(storedProctor);
+        setProctor(parsed);
+        // Force the error state to display the debug info even if parsed
+        setProctorError(`DEBUG INFO: typeof parsed=${typeof parsed}, Array=${Array.isArray(parsed)}, name=${parsed?.name}, keys=${Object.keys(parsed).join(',')}`);
       } else {
-        setProctorError("No proctor information found.");
+        setProctorError(`No proctor information found. storedProctor was: ${storedProctor}`);
       }
     } catch (err: any) {
       setProctorError(`Failed to load proctor data. ${err.message}`);
