@@ -118,9 +118,9 @@ type FacultyCourseInfo = {
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Proctor Section */}
  <div className="md:col-span-1 space-y-6">
- <Card className="relative overflow-hidden bg-white/20 dark:bg-[#0a0a0f]/40 bg-gradient-to-br from-white/30 to-transparent dark:from-purple-500/5 dark:to-transparent backdrop-blur-[24px] border border-white/40 dark:border-white/10 shadow-[0_8px_32px_rgba(168,85,247,0.12)] hover:shadow-[0_16px_48px_rgba(168,85,247,0.25)] hover:-translate-y-1.5 hover:backdrop-blur-[32px] transition-all duration-300 ease-out">
- <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 dark:via-white/2 dark:to-white/10 pointer-events-none" />
- <CardHeader className="relative z-10 bg-white/30 dark:bg-white/5 border-b border-white/30 dark:border-white/10 p-5 pb-4 backdrop-blur-md">
+ <Card className="relative overflow-hidden bg-[#0f121e]/60 backdrop-blur-[24px] border border-white/5 shadow-[0_8px_32px_rgba(168,85,247,0.15)] hover:shadow-[0_16px_48px_rgba(168,85,247,0.3)] hover:-translate-y-1.5 hover:backdrop-blur-[32px] transition-all duration-300 ease-out">
+ <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none" />
+ <CardHeader className="relative z-10 bg-white/[0.03] border-b border-white/5 p-5 pb-4 backdrop-blur-md">
  <div className="flex flex-col justify-center">
  <CardTitle className="text-purple-400 text-sm font-medium flex items-center gap-2 uppercase tracking-wider mb-3 mt-1">
  <User className="w-4 h-4" />
@@ -128,13 +128,13 @@ type FacultyCourseInfo = {
  </CardTitle>
  {(!isProctorLoading && !proctorError && proctor?.name) && (
  <div className="flex flex-col justify-center">
- <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 line-clamp-1">{proctor.name}</h3>
- <p className="text-sm text-purple-700 dark:text-purple-400 font-medium flex items-center gap-1.5 mt-1 line-clamp-1">
+ <h3 className="font-bold text-xl text-gray-100 line-clamp-1">{proctor.name}</h3>
+ <p className="text-sm text-purple-400 font-medium flex items-center gap-1.5 mt-1 line-clamp-1">
  <Briefcase className="w-3.5 h-3.5 shrink-0" />
  <span className="truncate">{proctor.designation || "Proctor"}</span>
  </p>
  {proctor.facultyId && (
- <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5 mt-1">
+ <p className="text-sm text-gray-400 flex items-center gap-1.5 mt-1">
  <User className="w-3.5 h-3.5 shrink-0" />
  {proctor.facultyId}
  </p>
@@ -159,26 +159,26 @@ type FacultyCourseInfo = {
   <div className="space-y-4">
   {proctor.email && (
   <div className="flex items-center gap-4 text-[15px] group">
-  <div className="p-2.5 bg-purple-500/10 dark:bg-purple-400/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><Mail className="w-4 h-4" /></div>
-  <a href={`mailto:${proctor.email}`} className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors truncate">{proctor.email}</a>
+  <div className="p-2.5 bg-purple-500/10 rounded-xl text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><Mail className="w-4 h-4" /></div>
+  <a href={`mailto:${proctor.email}`} className="text-gray-200 hover:text-purple-400 font-medium transition-colors truncate">{proctor.email}</a>
   </div>
   )}
   {proctor.phone && (
   <div className="flex items-center gap-4 text-[15px] group">
-  <div className="p-2.5 bg-purple-500/10 dark:bg-purple-400/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><Phone className="w-4 h-4" /></div>
-  <a href={`tel:${proctor.phone}`} className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors">{proctor.phone}</a>
+  <div className="p-2.5 bg-purple-500/10 rounded-xl text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><Phone className="w-4 h-4" /></div>
+  <a href={`tel:${proctor.phone}`} className="text-gray-200 hover:text-purple-400 font-medium transition-colors">{proctor.phone}</a>
   </div>
   )}
   {proctor.cabin && (
   <div className="flex items-center gap-4 text-[15px] group">
-  <div className="p-2.5 bg-purple-500/10 dark:bg-purple-400/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><MapPin className="w-4 h-4" /></div>
-  <span className="text-gray-800 dark:text-gray-200 font-medium">{proctor.cabin}</span>
+  <div className="p-2.5 bg-purple-500/10 rounded-xl text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><MapPin className="w-4 h-4" /></div>
+  <span className="text-gray-200 font-medium">{proctor.cabin}</span>
   </div>
   )}
   {proctor.school && (
   <div className="flex items-center gap-4 text-[15px] group">
-  <div className="p-2.5 bg-purple-500/10 dark:bg-purple-400/10 rounded-xl text-purple-600 dark:text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><GraduationCap className="w-4 h-4" /></div>
-  <span className="text-gray-800 dark:text-gray-200 font-medium">{proctor.school}</span>
+  <div className="p-2.5 bg-purple-500/10 rounded-xl text-purple-400 group-hover:bg-purple-500/20 transition-colors shadow-sm"><GraduationCap className="w-4 h-4" /></div>
+  <span className="text-gray-200 font-medium">{proctor.school}</span>
   </div>
   )}
   </div>
