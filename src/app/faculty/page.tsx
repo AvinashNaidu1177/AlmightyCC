@@ -7,12 +7,14 @@ import { User, Mail, Phone, MapPin, Briefcase, Users, GraduationCap } from "luci
 import { API_BASE } from "@/components/custom/Main";
 
  type ProctorInfo = {
-  proctorName?: string;
-  proctorEmail?: string;
-  proctorMobile?: string;
-  proctorDesignation?: string;
-  cabin?: string;
+  facultyId?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  designation?: string;
   school?: string;
+  cabin?: string;
+  facultyDepartment?: string;
  };
 
 type FacultyCourseInfo = {
@@ -52,8 +54,7 @@ type FacultyCourseInfo = {
       if (storedProctor && storedProctor !== "undefined") {
         setProctor(JSON.parse(storedProctor));
       } else {
-        const debug = localStorage.getItem("proctor_debug");
-        setProctorError(`No proctor information found. Debug: ${debug}`);
+        setProctorError("No proctor information found.");
       }
     } catch (err: any) {
       setProctorError(`Failed to load proctor data. ${err.message}`);
@@ -136,26 +137,32 @@ type FacultyCourseInfo = {
   Retry
   </button>
   </div>
-  ) : proctor?.proctorName ? (
+  ) : proctor?.name ? (
   <>
   <div>
-  <h3 className="font-bold text-lg">{proctor.proctorName}</h3>
+  <h3 className="font-bold text-lg">{proctor.name}</h3>
   <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
   <Briefcase className="w-3 h-3" />
-  {proctor.proctorDesignation || "Proctor"}
+  {proctor.designation || "Proctor"}
   </p>
+  {proctor.facultyId && (
+  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+  <User className="w-3 h-3" />
+  {proctor.facultyId}
+  </p>
+  )}
   </div>
   <div className="space-y-3 pt-4 border-t border-gray-800">
-  {proctor.proctorEmail && (
+  {proctor.email && (
   <div className="flex items-center gap-3 text-sm">
   <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Mail className="w-4 h-4" /></div>
-  <a href={`mailto:${proctor.proctorEmail}`} className="hover:text-purple-500 transition-colors">{proctor.proctorEmail}</a>
+  <a href={`mailto:${proctor.email}`} className="hover:text-purple-500 transition-colors">{proctor.email}</a>
   </div>
   )}
-  {proctor.proctorMobile && (
+  {proctor.phone && (
   <div className="flex items-center gap-3 text-sm">
   <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-400"><Phone className="w-4 h-4" /></div>
-  <a href={`tel:${proctor.proctorMobile}`} className="hover:text-purple-500 transition-colors">{proctor.proctorMobile}</a>
+  <a href={`tel:${proctor.phone}`} className="hover:text-purple-500 transition-colors">{proctor.phone}</a>
   </div>
   )}
   {proctor.cabin && (
