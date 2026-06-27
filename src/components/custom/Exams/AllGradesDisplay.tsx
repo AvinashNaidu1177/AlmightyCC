@@ -67,7 +67,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  }}
  className={`flex-1 min-w-[160px] text-center py-2 text-sm font-medium transition-colors ${activeSem === sem
  ? "bg-purple-600 text-white midnight:bg-purple-700"
- : "bg-[#111111] text-gray-400 hover:bg-gray-800 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 midnight:hover:bg-gray-900"
+ : "bg-[#111111] text-gray-400 hover:bg-gray-800 dark:bg-black/40 border-purple-500/20 dark:text-gray-300 dark:hover:bg-slate-600 midnight:hover:bg-gray-900"
  }`}
  >
  {sem.endsWith("1") ? `FALLSEM` : `WINTERSEM`} {sem.slice(4, -4)}-{sem.slice(6, -2)}
@@ -80,7 +80,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  }}
  className={`flex-1 min-w-[160px] text-center py-2 text-sm font-medium transition-colors ${activeSem === "predict"
  ? "bg-purple-600 text-white midnight:bg-purple-700"
- : "bg-[#111111] text-gray-400 hover:bg-gray-800 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 midnight:hover:bg-gray-900"
+ : "bg-[#111111] text-gray-400 hover:bg-gray-800 dark:bg-black/40 border-purple-500/20 dark:text-gray-300 dark:hover:bg-slate-600 midnight:hover:bg-gray-900"
  }`}
  >
  Predict CGPA
@@ -99,7 +99,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  {activeSem !== "predict" && gradeList.map((course, idx) => (
  <div
  key={course.courseId || course.courseCode || idx}
- className="p-4 rounded-lg shadow bg-slate-800 cursor-pointer"
+ className="p-4 rounded-lg shadow bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer"
  onClick={() => setOpenCourse(course.courseId)}
  >
  <div className="flex justify-between items-start gap-3">
@@ -108,7 +108,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  {course.courseCode} - {course.courseTitle}
  </span>
 
- <div className="px-3 py-1 inline-flex items-center justify-center bg-[#111111] dark:bg-slate-700 midnight:bg-gray-900 text-white dark:text-gray-300 text-xs rounded-full outline outline-1 outline-gray-700 dark:outline-gray-500 midnight:outline-gray-700 mt-2">
+ <div className="px-3 py-1 inline-flex items-center justify-center bg-[#111111] dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900 text-white dark:text-gray-300 text-xs rounded-full outline outline-1 outline-gray-700 dark:outline-gray-500 midnight:outline-gray-700 mt-2">
  {course.courseType}
  </div>
  </div>
@@ -129,7 +129,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50"
  >
  <div
- className="bg-slate-800 rounded-xl shadow-lg p-6 max-w-3xl w-[95%] relative max-h-[90vh] overflow-y-auto"
+ className="bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md rounded-xl shadow-lg p-6 max-w-3xl w-[95%] relative max-h-[90vh] overflow-y-auto"
  onClick={(e) => e.stopPropagation()}
  >
  <h2 className="text-lg font-semibold mb-4 text-gray-100 ">
@@ -144,8 +144,8 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
 
  {course.range && (
  <div className="overflow-x-auto mt-2">
- <table className="w-full border border-gray-700 dark:border-gray-600 ">
- <thead className="bg-gray-800 text-white dark:bg-slate-700 midnight:bg-gray-900">
+ <table className="w-full border border-purple-500/20 ">
+ <thead className="bg-gray-800 text-white dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900">
  <tr>
  {Object.keys(course.range as Record<string, string | number>).map((grade) => (
  <th key={grade} className="border p-2 text-center">
@@ -172,8 +172,8 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
 
  {course.details && course.details.length > 0 ? (
  <div className="overflow-x-auto mt-6">
- <table className="w-full border border-gray-700 dark:border-gray-600 ">
- <thead className="bg-gray-800 text-white dark:bg-slate-700 midnight:bg-gray-900">
+ <table className="w-full border border-purple-500/20 ">
+ <thead className="bg-gray-800 text-white dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900">
  <tr>
  <th className="border p-2 text-left">Component Name</th>
  <th className="border p-2 text-center">Max</th>
@@ -185,7 +185,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  {course.details.map((d, idx) => (
  <tr
  key={idx}
- className="border-gray-700 dark:border-gray-600 "
+ className="border-purple-500/20 "
  >
  <td className="border p-2">{d.component}</td>
  <td className="border p-2 text-center">{formatNumber(d.maxMark)}</td>
@@ -228,7 +228,7 @@ export default function AllGradesDisplay({ data, handleAllGradesFetch, CGPA, att
  variant="ghost"
  size="icon"
  onClick={() => setOpenCourse(null)}
- className="top-2 right-2 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-slate-700 midnight:hover:bg-gray-900"
+ className="top-2 right-2 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-black/40 border-purple-500/20 midnight:hover:bg-gray-900"
  >
  <X
  size={22}

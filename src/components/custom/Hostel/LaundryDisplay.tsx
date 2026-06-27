@@ -127,7 +127,7 @@ export default function LaundrySchedule({ hostelData, handleHostelDetailsFetch }
  <select
  value={gender}
  onChange={(e) => { setGender(e.target.value); setHostel(hostelOptions[e.target.value][0]) }}
- className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-slate-700 text-gray-100 "
+ className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-black/40 border-purple-500/20 text-gray-100 "
  >
  <option value="Male">Male</option>
  <option value="Female">Female</option>
@@ -136,7 +136,7 @@ export default function LaundrySchedule({ hostelData, handleHostelDetailsFetch }
  <select
  value={hostel}
  onChange={(e) => setHostel(e.target.value)}
- className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-slate-700 text-gray-100 "
+ className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-black/40 border-purple-500/20 text-gray-100 "
  >
  {hostelOptions[gender]?.map((h) => (
  <option key={h} value={h}>
@@ -149,8 +149,8 @@ export default function LaundrySchedule({ hostelData, handleHostelDetailsFetch }
 
  {schedule.length > 0 ? (
  <div className="overflow-x-auto">
- <table className="min-w-full border-collapse table-auto bg-slate-800 text-gray-100 ">
- <thead className="bg-gray-900 dark:bg-slate-700 midnight:bg-slate-900">
+ <table className="min-w-full border-collapse table-auto bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md text-gray-100 ">
+ <thead className="bg-gray-900 dark:bg-black/40 border-purple-500/20 midnight:bg-slate-900">
  <tr>
  <th className="px-4 py-2 text-center border-b border-gray-700">
  Date
@@ -171,10 +171,10 @@ export default function LaundrySchedule({ hostelData, handleHostelDetailsFetch }
  : ""
  }`}
  >
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {item.Date}
  </td>
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {item.RoomNumber}
  </td>
  </tr>

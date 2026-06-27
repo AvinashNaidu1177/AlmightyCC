@@ -108,7 +108,7 @@ export default function MarksDisplay({ data }) {
  return (
  <div
  key={idx}
- className="p-4 rounded-lg shadow bg-slate-800 cursor-pointer"
+ className="p-4 rounded-lg shadow bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md cursor-pointer"
  onClick={() => toggleCourse(course.slNo)}
  >
  <div className="flex justify-between items-center">
@@ -117,7 +117,7 @@ export default function MarksDisplay({ data }) {
  {course.courseCode} - {course.courseTitle}
  </span>
 
- <div className="px-3 py-1 flex items-center justify-center bg-[#111111] dark:bg-slate-700 midnight:bg-gray-900 text-white dark:text-gray-300 text-xs rounded-full outline outline-1 outline-gray-700 dark:outline-gray-500 midnight:outline-gray-700 mt-2">
+ <div className="px-3 py-1 flex items-center justify-center bg-[#111111] dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900 text-white dark:text-gray-300 text-xs rounded-full outline outline-1 outline-gray-700 dark:outline-gray-500 midnight:outline-gray-700 mt-2">
  {course.courseType}
  </div>
  </div>
@@ -201,7 +201,7 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
 
  return (
  <div data-scrollable className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
- <div className="bg-slate-800 rounded-xl shadow-lg p-6 max-w-3xl w-[95%] relative max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+ <div className="bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md rounded-xl shadow-lg p-6 max-w-3xl w-[95%] relative max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
  <h2 className="text-lg font-semibold mb-4 text-gray-100 ">
  {course.courseCode} – {course.courseTitle}
  </h2>
@@ -217,8 +217,8 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
 
  <div className="overflow-x-auto">
  {/* Theory component table */}
- <table className="w-full border mt-2 border-gray-700 dark:border-gray-600 ">
- <thead className="bg-gray-800 text-white dark:bg-slate-700 midnight:bg-gray-900">
+ <table className="w-full border mt-2 border-purple-500/20 ">
+ <thead className="bg-gray-800 text-white dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900">
  <tr>
  <th className="border p-2 text-left">Test</th>
  <th className="border p-2">Max</th>
@@ -231,7 +231,7 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  {course.assessments.map((asm, asmIdx) => (
  <tr
  key={`theory-${asmIdx}`}
- className="border-gray-700 dark:border-gray-600 "
+ className="border-purple-500/20 "
  >
  <td className="border p-2">{asm.title}</td>
  <td className="border p-2">{formatNumber(asm.maxMark)}</td>
@@ -255,8 +255,8 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  {labCourse && labCourse.assessments && labCourse.assessments.length > 0 && (
  <div className="mt-6">
  <h3 className="font-semibold mb-2">Lab Component</h3>
- <table className="w-full border mt-2 border-gray-700 dark:border-gray-600 ">
- <thead className="bg-gray-800 text-white dark:bg-slate-700 midnight:bg-gray-900">
+ <table className="w-full border mt-2 border-purple-500/20 ">
+ <thead className="bg-gray-800 text-white dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900">
  <tr>
  <th className="border p-2 text-left">Test</th>
  <th className="border p-2">Max</th>
@@ -267,7 +267,7 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  </thead>
  <tbody>
  {labCourse.assessments.map((asm, asmIdx) => (
- <tr key={`lab-${asmIdx}`} className="border-gray-700 dark:border-gray-600 ">
+ <tr key={`lab-${asmIdx}`} className="border-purple-500/20 ">
  <td className="border p-2">{asm.title}</td>
  <td className="border p-2">{formatNumber(asm.maxMark)}</td>
  <td className="border p-2">{formatNumber(asm.scoredMark)}</td>
@@ -312,9 +312,9 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  <p className="mb-2 text-sm text-gray-400 dark:text-gray-300 ">
  Data points: {dataPoints} | Mean: {formatNumber(stats.mean)} | SD: {formatNumber(stats.sd)}
  </p>
- <table className="w-full border border-gray-700 dark:border-gray-600 ">
+ <table className="w-full border border-purple-500/20 ">
  <thead>
- <tr className="bg-[#111111] dark:bg-slate-700 midnight:bg-gray-900">
+ <tr className="bg-[#111111] dark:bg-black/40 border-purple-500/20 midnight:bg-gray-900">
  <th
  colSpan={7}
  className="border p-3 text-center font-semibold"
@@ -323,7 +323,7 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  </th>
  </tr>
 
- <tr className="bg-gray-900 dark:bg-slate-800 ">
+ <tr className="bg-gray-900 dark:bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md ">
  <th className="border p-2">S</th>
  <th className="border p-2">A</th>
  <th className="border p-2">B</th>
@@ -386,7 +386,7 @@ function MakrsModal({ course, labCourse, totals, courseTotal, onClose }) {
  variant="ghost"
  size="icon"
  onClick={onClose}
- className="top-2 right-2 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-slate-800 midnight:hover:bg-gray-900"
+ className="top-2 right-2 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md midnight:hover:bg-gray-900"
  >
  <X size={22} className="text-gray-600 dark:text-gray-300 " />
  </Button>

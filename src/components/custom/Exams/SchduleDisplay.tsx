@@ -214,7 +214,7 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
  return (
  <div
  key={examType}
- className="bg-slate-800 shadow rounded-2xl p-4 "
+ className="bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md shadow rounded-2xl p-4 "
  >
  <div className="flex items-center justify-between mb-4">
  <h2 className="text-xl font-semibold text-purple-700 dark:text-purple-400 midnight:text-white">
@@ -258,7 +258,7 @@ export default function ExamSchedule({ data, handleScheduleFetch }) {
  examDate && examDate.getTime() === today.getTime();
 
  let rowClass =
- "odd:bg-slate-100 even:bg-slate-200 dark:odd:bg-slate-700 dark:even:bg-slate-800 midnight:odd:bg-gray-900 midnight:even:bg-gray-800";
+ "odd:bg-slate-100 even:bg-slate-200 dark:odd:bg-black/40 border-purple-500/20 dark:even:bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md midnight:odd:bg-gray-900 midnight:even:bg-gray-800";
 
  if (isPast)
  rowClass +=

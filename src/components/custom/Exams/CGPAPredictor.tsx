@@ -112,7 +112,7 @@ export default function CGPAPredictor({ data, attendance, CGPA }) {
  };
 
  return (
- <div className="col-span-full p-3 rounded-lg shadow bg-slate-800 ">
+ <div className="col-span-full p-3 rounded-lg shadow bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md ">
  <div className="mb-2 text-center">
  <span className="text-lg font-semibold dark:text-purple-400">
  Predict CGPA
@@ -262,7 +262,7 @@ export default function CGPAPredictor({ data, attendance, CGPA }) {
  [key]: value
  }));
  }}
- className="rounded-md border border-slate-600 bg-slate-900 px-3 py-1.5 text-sm text-gray-100 disabled:cursor-not-allowed disabled:bg-[#111111] disabled:text-gray-500 dark:disabled:bg-slate-800 dark:disabled:text-gray-400 midnight:disabled:bg-gray-900 midnight:disabled:text-gray-500"
+ className="rounded-md border border-slate-600 bg-slate-900 px-3 py-1.5 text-sm text-gray-100 disabled:cursor-not-allowed disabled:bg-[#111111] disabled:text-gray-500 dark:disabled:bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md dark:disabled:text-gray-400 midnight:disabled:bg-gray-900 midnight:disabled:text-gray-500"
  >
  <option value="S">S (10)</option>
  <option value="A">A (9)</option>

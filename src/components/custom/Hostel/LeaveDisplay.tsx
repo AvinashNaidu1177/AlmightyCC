@@ -68,7 +68,7 @@ export default function LeaveDisplay({ leaveData, handleHostelDetailsFetch }) {
  </h1>
 
  {activeLeave ? (
- <div className="max-w-xl mx-auto mb-4 border border-gray-700 rounded-2xl p-4 bg-slate-800 text-gray-100 ">
+ <div className="max-w-xl mx-auto mb-4 border border-gray-700 rounded-2xl p-4 bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md text-gray-100 ">
  <h2 className="text-lg font-semibold text-center mb-3">
  Active Leave
  </h2>
@@ -115,8 +115,8 @@ export default function LeaveDisplay({ leaveData, handleHostelDetailsFetch }) {
 
  {showHistory && pastLeaves.length > 0 && (
  <div data-scrollable className="mt-6 overflow-x-auto">
- <table className="min-w-full border-collapse table-auto bg-slate-800 text-gray-100 ">
- <thead className="bg-gray-900 dark:bg-slate-700 midnight:bg-slate-900">
+ <table className="min-w-full border-collapse table-auto bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md text-gray-100 ">
+ <thead className="bg-gray-900 dark:bg-black/40 border-purple-500/20 midnight:bg-slate-900">
  <tr>
  <th className="px-4 py-2 text-center border-b border-gray-700">
  Leave ID
@@ -138,19 +138,19 @@ export default function LeaveDisplay({ leaveData, handleHostelDetailsFetch }) {
  <tbody>
  {pastLeaves.map((leave, idx) => (
  <tr key={idx}>
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {leave.leaveId}
  </td>
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {leave.from}
  </td>
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {leave.to}
  </td>
- <td className="px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700">
+ <td className="px-4 py-2 text-center border-b border-purple-500/20">
  {leave.reason}
  </td>
- <td className={`px-4 py-2 text-center border-b border-gray-800 dark:border-gray-700 ${getStatusClasses(
+ <td className={`px-4 py-2 text-center border-b border-purple-500/20 ${getStatusClasses(
  leave.status
  )}`}>
  <span

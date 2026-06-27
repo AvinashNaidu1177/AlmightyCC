@@ -42,7 +42,7 @@ export default function vitolDisplay({ vitolData, handleFetchVitol, setVitolData
  return (
  <div
  key={idx}
- className="p-4 rounded-lg shadow bg-slate-800 
+ className="p-4 rounded-lg shadow bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md 
  
  hover:shadow-md transition cursor-pointer"
  >

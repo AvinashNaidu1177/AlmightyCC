@@ -136,7 +136,7 @@ export default function MessDisplay({ hostelData, handleHostelDetailsFetch }) {
  <select
  value={gender}
  onChange={(e) => setGender(e.target.value)}
- className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-slate-700 text-gray-100 "
+ className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-black/40 border-purple-500/20 text-gray-100 "
  >
  <option value="Male">Male</option>
  <option value="Female">Female</option>
@@ -145,7 +145,7 @@ export default function MessDisplay({ hostelData, handleHostelDetailsFetch }) {
  <select
  value={type}
  onChange={(e) => setType(e.target.value)}
- className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-slate-700 text-gray-100 "
+ className="border rounded-lg p-2 shadow-sm hover:cursor-pointer bg-black/40 border-purple-500/20 text-gray-100 "
  >
  <option value="Veg">Veg</option>
  <option value="Non Veg">Non Veg</option>

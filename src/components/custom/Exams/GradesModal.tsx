@@ -33,13 +33,13 @@ export default function GradesModal({ GradesData, onClose, handleFetchGrades, ma
 
  return (
  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
- <div className="rounded-2xl shadow-lg w-11/12 max-w-md md:max-w-5xl max-h-[90vh] overflow-y-auto relative bg-slate-800 ">
+ <div className="rounded-2xl shadow-lg w-11/12 max-w-md md:max-w-5xl max-h-[90vh] overflow-y-auto relative bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md ">
  <GradesDisplay data={GradesData} handleFetchGrades={handleFetchGrades} marksData={marksData} attendance={attendance} />
  <Button
  variant="ghost"
  size="icon"
  onClick={onClose}
- className="top-4 right-4 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-slate-800 midnight:hover:bg-gray-900"
+ className="top-4 right-4 absolute cursor-pointer hover:bg-[#111111] dark:hover:bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md midnight:hover:bg-gray-900"
  >
  <X size={22} className="text-gray-600 dark:text-gray-300 " />
  </Button>
@@ -139,7 +139,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
 
  return (
  <div>
- <Card className="bg-slate-800 border-0">
+ <Card className="bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md border-0">
  <CardHeader>
  <CardTitle className="text-lg font-bold text-gray-100 ">Grade Distribution <button onClick={handleFetchGrades} className="mt-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors">
  <RefreshCcw className={`w-4 h-4`} />
@@ -149,7 +149,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
  {Object.entries((data?.cgpa?.grades || {}) as Record<string, number>).map(([grade, count]) => (
  <div
  key={grade}
- className="p-2 rounded-lg bg-gray-900 dark:bg-slate-700 midnight:bg-gray-800 text-gray-100 font-bold"
+ className="p-2 rounded-lg bg-gray-900 dark:bg-black/40 border-purple-500/20 midnight:bg-gray-800 text-gray-100 font-bold"
  >
  <p>{grade}</p>
  <p className="text-gray-600 dark:text-gray-300 font-medium">{count}</p>
@@ -158,7 +158,7 @@ function GradesDisplay({ data, handleFetchGrades, marksData, attendance }) {
  </CardContent>
  </Card>
 
- <Card className="bg-slate-800 border-0">
+ <Card className="bg-gradient-to-br from-[#1c0f30]/80 to-black border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.05)] hover:-translate-y-[2px] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] hover:border-purple-500/50 transition-all duration-300 backdrop-blur-md border-0">
  <CardContent className="space-y-6">
  {totalCredits && (() => {
  const earned = parseFloat(totalCredits.creditsEarned);
