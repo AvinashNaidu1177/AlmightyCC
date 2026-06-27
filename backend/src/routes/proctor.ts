@@ -145,7 +145,7 @@ router.post("/", validateVtopSession, async (req: Request, res: Response) => {
         // Do not throw an exception that crashes the route, return gracefully
         return res.status(200).json({ 
             success: false, 
-            message: "No proctor information found." 
+            message: `Backend Error: ${err.message}` 
         });
     }
 });

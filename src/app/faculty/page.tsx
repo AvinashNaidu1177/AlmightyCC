@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { User, Mail, Phone, MapPin, Briefcase, Users, GraduationCap } from "lucide-react";
+import { API_BASE } from "@/components/custom/Main";
 
  type ProctorInfo = {
   proctorName?: string;
@@ -47,15 +48,37 @@ type FacultyCourseInfo = {
    setIsProctorLoading(true);
    setProctorError(null);
    try {
-     const ids = localStorage.getItem("IDs");
-     const cookies = localStorage.getItem("cookies");
+     const idsRaw = localStorage.getItem("IDs");
+     if (!idsRaw) {
+         setProctorError("No credentials found. Please log in again.");
+         setIsProctorLoading(false);
+         return;
+     }
+     const ids = JSON.parse(idsRaw);
      
-     if (!ids || !cookies) return;
-     
-     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/proctor`, {
+     // 1. Get fresh VTOP session
+     const loginResponse = await fetch(`${API_BASE}/api/login`, {
        method: "POST",
        headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ authorizedID: ids, cookies, csrf: "dummy" }),
+       body: JSON.stringify({ username: ids.VtopUsername, password: ids.VtopPassword }),
+     });
+     const loginData = await loginResponse.json();
+     
+     if (!loginData.success) {
+         setProctorError(loginData.message || "Failed to authenticate with VTOP.");
+         setIsProctorLoading(false);
+         return;
+     }
+
+     // 2. Fetch proctor info using fresh session
+     const response = await fetch(`${API_BASE}/api/proctor`, {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({ 
+           authorizedID: loginData.authorizedID, 
+           cookies: loginData.cookies, 
+           csrf: loginData.csrf 
+       }),
      });
      
      const data = await response.json();
