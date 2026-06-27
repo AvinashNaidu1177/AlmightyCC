@@ -67,7 +67,6 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
 
  let classesTillCAT1: RemainingClassDay[] | null = null;
  let classesTillCAT2: RemainingClassDay[] | null = null;
- let classesTillMidSem: RemainingClassDay[] | null = null;
  let classesTillLID: RemainingClassDay[] | null = null;
 
  if (Array.isArray(analyzeCalendars) && analyzeCalendars.length > 0) {
@@ -78,12 +77,10 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  if (isLab) {
  classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
  classesTillCAT2 = countTillDate(impDates.cat2Date) || [];
- classesTillMidSem = countTillDate(impDates.midsemStart) || [];
  classesTillLID = countTillDate(impDates.lidLabDate) || [];
  } else if (isTheory) {
  classesTillCAT1 = countTillDate(impDates.cat1Date) || [];
  classesTillCAT2 = countTillDate(impDates.cat2Date) || [];
- classesTillMidSem = countTillDate(impDates.midsemStart) || [];
  classesTillLID = countTillDate(impDates.lidTheoryDate) || [];
  }
  }
@@ -203,14 +200,12 @@ export default function PopupCard({ a, setExpandedIdx, dayCardsMap, analyzeCalen
  {[
  classesTillCAT1,
  classesTillCAT2,
- classesTillMidSem,
  classesTillLID,
  ].some((data) => Array.isArray(data)) ? (
  <div className="text-sm space-y-3 mt-3 border-t border-b border-gray-700/50 py-2">
  {[
  { key: "CAT1", label: "Classes left before CAT I", data: classesTillCAT1 },
  { key: "CAT2", label: "Classes left before CAT II", data: classesTillCAT2 },
- { key: "MIDSEM", label: "Classes left before Mid Term Test", data: classesTillMidSem },
  { key: "LID", label: "Classes left before FAT", data: classesTillLID },
  ].map(({ key, label, data }) => (
  Array.isArray(data) ? (
