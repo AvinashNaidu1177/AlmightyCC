@@ -79,6 +79,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           value={{ light: "light", dark: "dark", midnight: "midnight" }}
         >
           {children}
+          <div className="fixed bottom-2 left-2 text-[10px] text-gray-500/30 pointer-events-none z-50 font-mono">
+            {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA 
+              ? `v.${process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA.substring(0, 7)}` 
+              : 'v.dev'}
+          </div>
         </ThemeProvider>
         <Toaster theme="dark" toastOptions={{ className: 'bg-gray-900 border-purple-600 text-white' }} />
         <Analytics />
