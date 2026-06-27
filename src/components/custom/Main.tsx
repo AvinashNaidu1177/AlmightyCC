@@ -315,8 +315,8 @@ export default function LoginPage() {
  setMarksData(marksRes);
  setGradesData(gradesRes);
  setAllGradesData(allGradesRes);
- if (proctorRes && proctorRes.proctorInfo) {
- localStorage.setItem("proctor", JSON.stringify(proctorRes.proctorInfo));
+ if (proctorRes && (proctorRes.data || proctorRes.proctorInfo)) {
+ localStorage.setItem("proctor", JSON.stringify(proctorRes.data || proctorRes.proctorInfo));
  }
  localStorage.setItem("grades", JSON.stringify(gradesRes));
  localStorage.setItem("allGrades", JSON.stringify(allGradesRes));
