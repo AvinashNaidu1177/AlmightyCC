@@ -1,5 +1,8 @@
 # AlmightyCC
 
+> 🚀 **NOTICE: AlmightyCC Version 2 is launching soon!** 
+> We are currently building a massive update featuring a completely redesigned architecture, lightning-fast performance, persistent local sessions, and a beautifully reimagined pure OLED dark UI. Stay tuned!
+
 Welcome to AlmightyCC!
 
 **Live site:** [https://almightycc.vercel.app/](https://almightycc.vercel.app/)
